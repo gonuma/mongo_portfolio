@@ -12,6 +12,11 @@ const articleSchema = new Schema({
         type: String,
         require: true,
         unique: true
+    },
+    category: {
+        type: String,
+        require: true,
+        unique: false
     }
 })
 

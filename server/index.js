@@ -23,7 +23,7 @@ const db = mongoose.connection;
 db.once("open", () => {
     console.log("Connected to MongoDB database.")
 })
-db.on("error", console.error.bind(console, "MonboDB connection error:"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Fetch all articles
 
@@ -37,14 +37,14 @@ db.on("error", console.error.bind(console, "MonboDB connection error:"));
 
 app.get("/articles", async (req, res) => {
     const articles = await Article.find({});
-    console.log("Articles from DB: ", articles);
+    // console.log("Articles from DB: ", articles);
     res.send(articles);
 })
 
 // Fetch single article
 app.get("/article", async (req, res) => {
     const article = await Article.find({});
-    console.log("Selected article: ", article);
+    // console.log("Selected article: ", article);
     res.send(article);
 })
 
@@ -56,7 +56,8 @@ app.post("/article", async (req, res) => {
 
         const newArticle = new Article ({
             title: req.body.title,
-            body: req.body.body
+            body: req.body.body,
+            category: req.body.category
         });
 
         await Article.create(newArticle);
