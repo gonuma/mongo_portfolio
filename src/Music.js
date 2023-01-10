@@ -1,26 +1,14 @@
 import React from "react";
+import Image from "react-bootstrap/Image";
 
 const Music = () => {
   return (
-    <div
-      className="pic-frame"
-      style={{
-        width: "50vh",
-        overflow: "hidden",
-        display: "flex",
-      }}
-    >
-      <img
-        style={{
-          maxWidth: "inherit",
-          maxHeight: "inherit",
-          height: "inherit",
-          width: "inherit",
-          objectFit: "cover",
-        }}
+    <>
+      <Image
+        fluid
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/jimmy-page-robert-plant-freddie-mercury.jpg"
       />
-    </div>
+    </>
   );
 };
 

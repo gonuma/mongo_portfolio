@@ -8,8 +8,8 @@ import App from "./App.js";
 import Header from "./Header";
 import Home from "./Home";
 import Music from "./Music";
-import Tech from "./Tech";
-import Cycling from "./Cycling";
+import Notes from "./Notes";
+import Hobby from "./Hobby";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,8 +19,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/music" element={<Music />} />
-        <Route path="/cycling" element={<Cycling />} />
-        <Route path="/tech" element={<Tech />} />
+        <Route path="/hobby" element={<Hobby />} />
+        <Route path="/notes" element={<Notes />} />
       </Routes>
     </Router>
   </React.StrictMode>
