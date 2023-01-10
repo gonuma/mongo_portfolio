@@ -7,7 +7,12 @@ const Music = () => {
     <Container>
       <Image
         fluid
-        style={{ height: "50vh", display: "block", margin: "auto" }}
+        style={{
+          height: "50vh",
+          padding: "1vh",
+          display: "block",
+          margin: "auto",
+        }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/jimmy-page-robert-plant-freddie-mercury.jpg"
       />
     </Container>

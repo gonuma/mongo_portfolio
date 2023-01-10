@@ -27,7 +27,12 @@ export default function Notes() {
     <Container>
       <Image
         fluid
-        style={{ height: "20vh", display: "block", margin: "auto" }}
+        style={{
+          height: "20vh",
+          padding: "1vh",
+          display: "block",
+          margin: "auto",
+        }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
       />
       <Accordion alwaysOpen>
