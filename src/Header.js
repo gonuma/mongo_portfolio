@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+import logo from "./no-back-logo.svg";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 
 const Header = () => {
