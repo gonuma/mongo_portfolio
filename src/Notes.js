@@ -6,7 +6,9 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
 export default function Notes() {
+  const categories = [];
   const [articles, setArticles] = useState([]);
+  const [article, setArticle] = useState("");
 
   const loadArticles = async () => {
     const response = await axios.get(
@@ -16,12 +18,37 @@ export default function Notes() {
         ":5000/articles"
     );
     setArticles(response.data);
-    // console.log(response.data);
   };
+
+  // const setCategories = () => {
+  //   categories.map((category, index) => {
+  //     console.log(category);
+  //     return (
+  //       <Accordion.Item eventKey={index}>
+  //         <Accordion.Header>{category}</Accordion.Header>
+  //         <Accordion.Body></Accordion.Body>
+  //       </Accordion.Item>
+  //     );
+  //   });
+  // };
+
+  // const loadCategories = async () => {
+  //   await articles.map((article, index) => {
+  //     if (!categories.includes(article.category)) {
+  //       categories.push(article.category);
+  //     } else {
+  //       setCategories();
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
     loadArticles();
   }, []);
+
+  // useEffect(() => {
+  //   loadCategories();
+  // });
 
   return (
     <Container>
@@ -51,7 +78,7 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
-                              console.log(article.body);
+                              setArticle(article.body);
                             }
                           });
                         }}
@@ -65,6 +92,7 @@ export default function Notes() {
             </ListGroup>
           </Accordion.Body>
         </Accordion.Item>
+
         <Accordion.Item eventKey="1">
           <Accordion.Header>Red Teaming</Accordion.Header>
           <Accordion.Body>
@@ -79,7 +107,7 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
-                              console.log(article.body);
+                              setArticle(article.body);
                             }
                           });
                         }}
@@ -107,7 +135,7 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
-                              console.log(article.body);
+                              setArticle(article.body);
                             }
                           });
                         }}
@@ -135,7 +163,7 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
-                              console.log(article.body);
+                              setArticle(article.body);
                             }
                           });
                         }}
@@ -150,26 +178,15 @@ export default function Notes() {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      {/* <Collapse>
-        <Panel header="Blue Teaming">
-          {articles.map((item, index) => {
-            {
-              if (item.category === "blue teaming") {
-                return <button>{item.title}</button>;
-              }
-            }
-          })}
-        </Panel>
-        <Panel header="Recon">
-          {articles.map((item, index) => {
-            {
-              if (item.category === "recon") {
-                return <button>{item.title}</button>;
-              }
-            }
-          })}
-        </Panel>
-      </Collapse> */}
+      <p id="article"></p>
+      <button
+        onClick={() => {
+          let target = document.getElementById("article");
+          return (target.innerText = article);
+        }}
+      >
+        test
+      </button>
     </Container>
   );
 }
