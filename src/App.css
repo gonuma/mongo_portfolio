@@ -30,6 +30,16 @@
   color: #61dafb;
 }
 
+.brand {
+  font-size: 2rem !important;
+}
+
+@media screen and (max-width: 450px) {
+  .brand {
+    font-size: 1rem !important;
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

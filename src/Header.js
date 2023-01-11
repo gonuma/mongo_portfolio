@@ -18,8 +18,8 @@ const Header = () => {
                 <img
                   alt=""
                   src={logo}
-                  width="40"
-                  height="30"
+                  width="100"
+                  height="50"
                   className="d-inline-block align-top"
                 />{" "}
               </Navbar.Brand>
@@ -27,22 +27,30 @@ const Header = () => {
             {/* </NavLink> */}
             {/* <NavLink> */}
             <Container>
-              <Navbar.Brand href="/">About Me</Navbar.Brand>
+              <Navbar.Brand className="brand" href="/">
+                About Me
+              </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
             <Container>
-              <Navbar.Brand href="/notes">Study Notes</Navbar.Brand>
+              <Navbar.Brand className="brand" href="/notes">
+                Study Notes
+              </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
             <Container>
-              <Navbar.Brand href="/hobby">Hobby</Navbar.Brand>
+              <Navbar.Brand className="brand" href="/hobby">
+                Hobby
+              </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
             <Container>
-              <Navbar.Brand href="/music">Music</Navbar.Brand>
+              <Navbar.Brand className="brand" href="/music">
+                Music
+              </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
           </Nav>
