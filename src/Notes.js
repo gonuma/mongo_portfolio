@@ -28,7 +28,8 @@ export default function Notes() {
       <Image
         fluid
         style={{
-          height: "20vh",
+          maxHeight: "20vh",
+          maxWidth: "90vw",
           padding: "1vh",
           display: "block",
           margin: "auto",

@@ -8,7 +8,8 @@ export default function Hobby() {
       <Image
         fluid
         style={{
-          height: "50vh",
+          maxHeight: "50vh",
+          maxWidth: "90vw",
           padding: "1vh",
           display: "block",
           margin: "auto",
