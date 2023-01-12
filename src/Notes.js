@@ -78,7 +78,10 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
+                              let articleDiv =
+                                document.getElementById("article");
                               setArticle(article.body);
+                              return (articleDiv.innerText = article.body);
                             }
                           });
                         }}
@@ -107,7 +110,10 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
+                              let articleDiv =
+                                document.getElementById("article");
                               setArticle(article.body);
+                              return (articleDiv.innerText = article.body);
                             }
                           });
                         }}
@@ -121,6 +127,7 @@ export default function Notes() {
             </ListGroup>
           </Accordion.Body>
         </Accordion.Item>
+
         <Accordion.Item eventKey="2">
           <Accordion.Header>Blue Teaming</Accordion.Header>
           <Accordion.Body>
@@ -135,7 +142,10 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
+                              let articleDiv =
+                                document.getElementById("article");
                               setArticle(article.body);
+                              return (articleDiv.innerText = article.body);
                             }
                           });
                         }}
@@ -149,6 +159,7 @@ export default function Notes() {
             </ListGroup>
           </Accordion.Body>
         </Accordion.Item>
+
         <Accordion.Item eventKey="3">
           <Accordion.Header>Recon</Accordion.Header>
           <Accordion.Body>
@@ -163,7 +174,10 @@ export default function Notes() {
                         onClick={(e) => {
                           articles.map((article) => {
                             if (article.title === e.target.text) {
+                              let articleDiv =
+                                document.getElementById("article");
                               setArticle(article.body);
+                              return (articleDiv.innerText = article.body);
                             }
                           });
                         }}
@@ -179,14 +193,14 @@ export default function Notes() {
         </Accordion.Item>
       </Accordion>
       <p id="article"></p>
-      <button
+      {/* <button
         onClick={() => {
           let target = document.getElementById("article");
           return (target.innerText = article);
         }}
       >
         test
-      </button>
+      </button> */}
     </Container>
   );
 }
