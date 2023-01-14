@@ -10,6 +10,7 @@ import Home from "./Home";
 import Music from "./Music";
 import Notes from "./Notes";
 import Hobby from "./Hobby";
+import Article from "./Article";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,6 +22,8 @@ root.render(
         <Route path="/music" element={<Music />} />
         <Route path="/hobby" element={<Hobby />} />
         <Route path="/notes" element={<Notes />} />
+        {/* Append article title or ID to /article endpoint */}
+        <Route path="/article" element={<Article />} />
       </Routes>
     </Router>
   </React.StrictMode>

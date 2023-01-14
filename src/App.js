@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./no-back-logo.svg";
 import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
