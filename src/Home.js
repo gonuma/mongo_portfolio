@@ -18,35 +18,26 @@ const Home = () => {
         style={{
           padding: "1vh",
           backgroundColor: "#D3D3D3",
-          height: "23vh",
+          // height: "15vh",
           marginLeft: "1vw",
           marginRight: "1vw",
         }}
       >
-        <Col xs={2}>
-          {/* <Image
-            fluid
-            style={{
-              borderRadius: "25px",
-              maxHeight: "20vh",
-            }}
-            src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
-          /> */}
-        </Col>
+        <Col xs={2}></Col>
         <Col
-          xs={8}
+          xs={12}
+          md={8}
           style={{
             textAlign: "center",
           }}
         >
-          <Row>
-            <h1>Greg Edmondson</h1>
-            <h5>IT Professional</h5>
-            <h5>📧 GregEdmondson95@gmail.com | ☎️ 080-7725-0495</h5>
-            <h5>🏠 Chofu, Tokyo, Japan</h5>
-          </Row>
+          <h1 style={{ fontSize: "3.052rem" }}>Greg Edmondson</h1>
+          <h3 style={{ fontSize: "1.953rem" }}>IT Professional</h3>
+          <h5 style={{ fontSize: "1.25rem" }}>📧 GregEdmondson95@gmail.com</h5>
+          <h5 style={{ fontSize: "1.25rem" }}>🏠 Chofu, Tokyo, Japan</h5>
         </Col>
-        <Col xs={2}>
+        {/* <Col xs={4} md={0}></Col> */}
+        <Col xs={4} md={2}>
           <Image
             fluid
             style={{
@@ -56,6 +47,7 @@ const Home = () => {
             src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
           />
         </Col>
+        {/* <Col xs={4} md={0}></Col> */}
       </Row>
       <Row
         style={{
@@ -74,13 +66,14 @@ const Home = () => {
         fluid
         style={{
           backgroundColor: "#D3D3D3",
-          height: "23vh",
+          // height: "50%",
           padding: "1vh",
           marginLeft: "1vw",
           marginRight: "1vw",
+          // minHeight: "50%",
         }}
       >
-        <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
           <Carousel.Item>
             <Col
             // style={{ margin: "auto" }}
@@ -138,10 +131,53 @@ const Home = () => {
           marginRight: "1vw",
         }}
       >
-        <Col style={{ margin: "auto" }}>
-          I'm going to use this space to introduce a few projects that I've
-          previously worked on.
-        </Col>
+        <Carousel interval={null}>
+          <Carousel.Item>
+            <Row style={{ textAlign: "center" }}>
+              <h1>MusiSpace</h1>
+              <p style={{}}>
+                MusiSpace is a place where users can easily share the music they
+                love. By simply creating an account and following their friends,
+                they can view all music that both they and their friends share.
+                Engineered a backend using Ruby on Rails and PSQL to provide
+                user verification and save users’ posts and comments. Built and
+                designed a responsive front-end using a mix of Ruby and ReactJS.
+                Continuously iterated and deployed updates to Heroku.
+              </p>
+            </Row>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Row style={{ textAlign: "center" }}>
+              <h1>CollabSpace</h1>
+              <p style={{}}>
+                For this project, I teamed up with a group of talented
+                programmers for a four day sprint. We wanted to create a space
+                for users to collaborate remotely, using the Vonage/OpenTok
+                video API and Google Drive. Created a backend using Knex, PSQL,
+                and Express to allow simple seeding and migration of our
+                database, user authentication, and Google Drive document
+                customization. Integrated video/voice chat into a frontend that
+                we created using ReactJS
+              </p>
+            </Row>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Row style={{ textAlign: "center" }}>
+              <h1>Senpai</h1>
+              <p style={{}}>
+                Senpai provides users with a single platform to pay for and
+                purchase programming tutoring using Stripe, video chat, and pair
+                program with senior or budding programmers. Senpai was built
+                around a REST API with MongoDB, Express, React, and Node.js.
+                Created a robust backend using MongoDB, Express, Stripe, and
+                Firebase, allowing users authentication, saving user data, and
+                user-generated products with custom prices. Built an intuitive
+                frontend using ReactJS and Material UI. Continuously iterated
+                and deployed software using Docker and GCP.
+              </p>
+            </Row>
+          </Carousel.Item>
+        </Carousel>
       </Row>
     </Container>
   );

@@ -16,6 +16,10 @@ const Music = () => {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/jimmy-page-robert-plant-freddie-mercury.jpg"
       />
+      <p>
+        I plan to link my Spotify account to this page to show what I've been
+        listening to recently, and to give music recommendations.
+      </p>
     </Container>
   );
 };

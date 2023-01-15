@@ -16,6 +16,10 @@ export default function Hobby() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/bike.jpg"
       />
+      <p>
+        I plan to talk about my many hobbies on this page, including cycling,
+        weight lifting, videogames, and electronics.
+      </p>
     </Container>
   );
 }
