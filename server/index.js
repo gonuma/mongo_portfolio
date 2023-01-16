@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors")
 const mongoose = require("mongoose");
 const Article = require("./model/article");
-
+const request = require("request");
 
 // Set up default MongoDB connection
 const mongoDB = process.env.MONGODB_URI;
@@ -26,15 +26,6 @@ db.once("open", () => {
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Fetch all articles
-
-// Left for records, but also work but isn't async/await
-// app.get("/articlelist", (req,res) => {
-//     Article.find({}, (err, data) => {
-//         console.log("Article from DB: ", data);
-//         res.send(data);
-//     })
-// })
-
 app.get("/articles", async (req, res) => {
     const articles = await Article.find({});
     // console.log("Articles from DB: ", articles);
@@ -47,7 +38,6 @@ app.get("/article", async (req, res) => {
     // console.log("Selected article: ", article);
     res.send(article);
 })
-
 
 // Create a new article
 app.post("/article", async (req, res) => {
@@ -67,6 +57,19 @@ app.post("/article", async (req, res) => {
         console.log(err);
     }
 })
+
+// Fetch Spotify top artists
+const headers = {Accept:"application/json", "content-type":"application/json", Authorization:process.env.SPOTIFY_API_AUTH}
+const url = "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5"
+
+app.get("/artists", async (req, res) => {
+        request.get({url: url, headers: headers}, function (e, r, body) {
+            console.log(body)
+            res.send(body)
+        })
+})
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
