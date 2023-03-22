@@ -12,10 +12,13 @@ export default function Notes() {
 
   const loadArticles = async () => {
     const response = await axios.get(
-      window.location.protocol +
+     window.location.protocol +
+      // "http:" +
         "//" +
         window.location.hostname +
+       // "13.112.125.158" +
         ":5000/articles"
+//"//13.112.125.158:5000/articles"
     );
     setArticles(response.data);
   };

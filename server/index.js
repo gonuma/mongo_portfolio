@@ -7,14 +7,25 @@ const mongoose = require("mongoose");
 const Article = require("./model/article");
 const request = require("request");
 
+
+//CORS Settings
+//app.use(cors());
+app.use(function(req, res, next){
+res.setHeader("Access-Control-Allow-Origin", "*");
+res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+res.setHeader("Access-Control-Allow-Credentials", true);
+next();
+});
+app.use(cors({origin:"*", credentials: true}))
+app.use(express.json());
+
+const port = 5000;
+
 // Set up default MongoDB connection
 const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.use(cors());
-app.use(express.json());
-
-const port = 5000;
 
 // Get default MongoDB connection
 const db = mongoose.connection;
