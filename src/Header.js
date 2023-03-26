@@ -47,10 +47,10 @@ const Header = () => {
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
-            <Container>
+           <Container>
               <Navbar.Brand className="brand" href="/music">
-                Music
-              </Navbar.Brand>
+               Music
+             </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
           </Nav>

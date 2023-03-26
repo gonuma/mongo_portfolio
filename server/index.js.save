@@ -7,21 +7,9 @@ const mongoose = require("mongoose");
 const Article = require("./model/article");
 const request = require("request");
 const path = require("path");
-let https = require("https");
-let fs = require("fs");
-//import fetch from "node-fetch@2";
-const fetch = require("node-fetch");
+//import fetch from "node-fetch";
 
 //app.use(express.static(path.join(__dirname, "../build")));
-
-// Import SSL certs
-let certs = {
-	key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-	cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem"))
-}
-
-// Initialize HTTPS server
-let server = https.createServer(certs, app);
 
 //CORS Settings
 
@@ -105,6 +93,6 @@ app.get("/refresh", async (req, res) => {
     .then((data) => res.send(data));
 });
 
-server.listen(port,() => {
+app.listen(portg, () => {
   console.log(`Server is running on port ${port}`);
 });

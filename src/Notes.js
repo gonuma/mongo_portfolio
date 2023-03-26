@@ -12,7 +12,6 @@ export default function Notes() {
 
   const loadArticles = async () => {
     const response = await axios.get(
-     window.location.protocol +
         "//" +
         window.location.hostname +
         ":5000/articles"

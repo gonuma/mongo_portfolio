@@ -15,7 +15,6 @@ const Music = () => {
   // Load Refreshed Token
   const getRefreshToken = async () => {
     const response = await axios.get(
-      window.location.protocol +
         "//" +
         window.location.hostname +
         ":5000/refresh"
