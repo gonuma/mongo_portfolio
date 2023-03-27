@@ -16,9 +16,12 @@ export default function Hobby() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/bike.jpg"
       />
-      <p>
+      <p style={{
+        textAlign: "left",
+        backgroundColor: "lightblue"
+      }}>
         I plan to talk about my many hobbies on this page, including cycling,
-        weight lifting, videogames, and electronics.
+        weight lifting, videogames, and all things IT. Over the years, I've tried a huge number of sports, including swimming, water polo, fencing, baseball, and fencing, but of all of the sports I've done, the one that has made the largest impact in my life is cycling.
       </p>
     </Container>
   );
