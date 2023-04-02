@@ -14,169 +14,266 @@ const Home = () => {
   };
 
   return (
-    <Container
-      fluid
-      style={{
-        // backgroundColor: "black",
-        height: "92.2vh",
-        width: "100%",
-      }}
-    >
-      <Row
-        style={
-          {
-            // backgroundColor: "lightblue"
-          }
-        }
-      >
-        <Col
-          sm={12}
-          md={6}
-          style={{
-            height: "49.5%",
-
-            // backgroundColor: "lightpink"
-          }}
-        >
-          <Card
-            style={{
-              width: "100%",
-              display: "flex",
-              marginLeft: "auto",
-              marginRight: "auto",
-              // marginTop: "10vh",
-            }}
-          >
-            <Card.Body>
-              <Card.Title
-                className="bg-dark text-white text-center"
-                style={{ fontSize: "2rem" }}
-              >
-                Greg Edmondson
-              </Card.Title>
-              <Card.Subtitle
-                className="mb-3 text-muted text-center"
-                style={{ fontSize: "1.5rem" }}
-              >
-                IT Professional
-              </Card.Subtitle>
-              <Card.Text className="" style={{ fontSize: "1.2rem" }}>
-                📧 GregEdmondson95@gmail.com <br></br> 🏠 Chofu, Tokyo, Japan
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          sm={12}
-          md={6}
-          style={{
-            height: "49.5%",
-
-            backgroundColor: "#D3D3D3",
-
-            // paddingBottom: "7vh",
-            // borderLeft: "2px dotted black",
-          }}
-        >
-          <Image
-            fluid
-            roundedCircle={true}
-            style={{
-              display: "flex",
-              marginTop: "3vh",
-              marginBottom: "1vh",
-              height: "33vh",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-            src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
-          />
+    <>
+      <Container fluid className="vh-100 d-flex flex-column text-center">
+        <Row fluid>
           <Col
-            // sm={12}
-            // md={6}
-            style={{
-              color: "black",
-              fontStyle: "italic",
-              textAlign: "center",
-              borderTop: "2px dotted black",
-              borderBottom: "2px dotted black",
-              marginLeft: "2vw",
-              marginRight: "2vw",
-              paddingLeft: "2vw",
-              paddingRight: "2vw",
-            }}
-          >
-            The best time to plant a tree was 20 years ago. The second best time
-            is now.
-          </Col>
-        </Col>
-      </Row>
-      <Row
-        style={{
-          display: "flex",
-          height: "50.5%",
-
-          // backgroundColor: "lightcoral",
-        }}
-      >
-        <Col
-          sm={12}
-          md={6}
-          style={{
-            // backgroundColor: "brown",
-            // borderTop: "2px dotted black",
-            backgroundColor: "#D3D3D3",
-          }}
-        >
-          <Card
-            className="border-0"
-            style={{
-              // width: "100%", display: "flex", marginLeft: "auto", marginRight: "auto",
-              backgroundColor: "#D3D3D3",
-              marginTop: "3vh",
-            }}
-          >
-            <Card.Body>
-              <Card.Title
-                className="bg-dark text-white text-center"
-                style={{ fontSize: "22px" }}
-              >
-                Senpai
-              </Card.Title>
-              <Card.Text className="bg-light" style={{ fontSize: "16px" }}>
-                Senpai provides users a platform to purchase remote programming
-                tutoring. Pairing live video chat and a collaborative IDE, users
-                can pair program with a tutor - a Senpai. Many technologies were
-                used, including MongoDB, Express, and ReactJS. User
-                authentication is performed with Firebase, while payments and
-                price-setting are available through Stripe. The frontend was
-                built using Material UI. Published new iterations and updates
-                using Docker and GCP.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col
-          sm={12}
-          md={6}
-          style={
-            {
-              // backgroundColor: "lightpink",
+            xs={12}
+            md={6}
+            style={
+              {
+                // backgroundColor: "lightblue"
+              }
             }
-          }
-        >
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/DLzxrzFCyOs"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-        </Col>
-      </Row>
-    </Container>
+          >
+            <Card
+              style={{
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            >
+              <Card.Body>
+                <Card.Title
+                  className="bg-dark text-white text-center"
+                  style={{ fontSize: "2rem" }}
+                >
+                  Greg Edmondson
+                </Card.Title>
+                <Card.Subtitle
+                  className="mb-3 text-muted text-center"
+                  style={{ fontSize: "1.5rem" }}
+                >
+                  IT Professional
+                </Card.Subtitle>
+                <Card.Text className="" style={{ fontSize: "1.2rem" }}>
+                  📧 GregEdmondson95@gmail.com <br></br> 🏠 Chofu, Tokyo, Japan
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col
+            xs={12}
+            md={6}
+            style={{
+              backgroundColor: "#D3D3D3",
+              // paddingBottom: "-5vh",
+            }}
+          >
+            <Image
+              fluid
+              roundedCircle={true}
+              style={{
+                marginTop: "2vh",
+                marginBottom: "1vh",
+                width: "30%",
+                height: "auto",
+              }}
+              src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
+            />
+            <Col
+              style={{
+                color: "black",
+                fontStyle: "italic",
+                textAlign: "center",
+                borderTop: "2px dotted black",
+                borderBottom: "2px dotted black",
+                marginLeft: "2vw",
+                marginRight: "2vw",
+                paddingLeft: "2vw",
+                paddingRight: "2vw",
+                // paddingBottom: "2vh",
+                marginBottom: "2vh",
+              }}
+            >
+              The best time to plant a tree was 20 years ago. The second best
+              time is now.
+            </Col>
+          </Col>
+        </Row>
+        {/* </Container>
+      <Container
+        fluid
+        className="vh-100 d-flex flex-column text-center"
+        style={{ backgroundColor: "lightblue" }}
+      > */}
+        <Row fluid style={{ height: "100%" }}>
+          <Col
+            xs={12}
+            md={6}
+            style={{
+              backgroundColor: "#D3D3D3",
+            }}
+          >
+            <Card
+              className="border-0"
+              style={{
+                backgroundColor: "#D3D3D3",
+                marginTop: "3vh",
+              }}
+            >
+              <Card.Body>
+                <Card.Title
+                  className="bg-dark text-white text-center"
+                  style={{ fontSize: "22px" }}
+                >
+                  Senpai
+                </Card.Title>
+                <Card.Text className="bg-light" style={{ fontSize: "16px" }}>
+                  Senpai provides users a platform to purchase remote
+                  programming tutoring. Pairing live video chat and a
+                  collaborative IDE, users can pair program with a tutor - a
+                  Senpai. Many technologies were used, including MongoDB,
+                  Express, and ReactJS. User authentication is performed with
+                  Firebase, while payments and price-setting are available
+                  through Stripe. The frontend was built using Material UI.
+                  Published new iterations and updates using Docker and GCP.
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            style={
+              {
+                // backgroundColor: "lightblue"
+              }
+            }
+          >
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/DLzxrzFCyOs"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style={{ paddingTop: "1vh" }}
+            ></iframe>
+          </Col>
+        </Row>
+        {/* <Row fluid style={{ position: "relative" }} className="h-50"></Row> */}
+      </Container>
+    </>
+    // <Container
+    //   fluid
+    //   className="vh-100 d-flex flex-column"
+    //   style={{
+    //     justifyContent: "space-between",
+    //     // backgroundColor: "black",
+    //   }}
+    // >
+    //   <Row fluid className="h-50" style={{}}>
+    //     <Col sm={12} md={6} style={{}}>
+    // <Card
+    //   style={{
+    //     marginLeft: "auto",
+    //     marginRight: "auto",
+    //   }}
+    // >
+    //   <Card.Body>
+    //     <Card.Title
+    //       className="bg-dark text-white text-center"
+    //       style={{ fontSize: "2rem" }}
+    //     >
+    //       Greg Edmondson
+    //     </Card.Title>
+    //     <Card.Subtitle
+    //       className="mb-3 text-muted text-center"
+    //       style={{ fontSize: "1.5rem" }}
+    //     >
+    //       IT Professional
+    //     </Card.Subtitle>
+    //     <Card.Text className="" style={{ fontSize: "1.2rem" }}>
+    //       📧 GregEdmondson95@gmail.com <br></br> 🏠 Chofu, Tokyo, Japan
+    //     </Card.Text>
+    //   </Card.Body>
+    // </Card>
+    //     </Col>
+    //     <Col sm={12} md={6} style={{ backgroundColor: "#D3D3D3" }}>
+    //       <Col className="text-center">
+    //         {" "}
+    // <Image
+    //   fluid
+    //   roundedCircle={true}
+    //   style={{
+    //     marginTop: "2vh",
+    //     marginBottom: "1vh",
+    //     width: "30%",
+    //     marginLeft: "auto",
+    //     marginRight: "auto",
+    //   }}
+    //   src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
+    // />
+    // <Col
+    //   style={{
+    //     color: "black",
+    //     fontStyle: "italic",
+    //     textAlign: "center",
+    //     borderTop: "2px dotted black",
+    //     borderBottom: "2px dotted black",
+    //     marginLeft: "2vw",
+    //     marginRight: "2vw",
+    //     paddingLeft: "2vw",
+    //     paddingRight: "2vw",
+    //   }}
+    // >
+    //   The best time to plant a tree was 20 years ago. The second best
+    //   time is now.
+    // </Col>
+    //       </Col>
+    //     </Col>
+    //   </Row>
+
+    //   <Row fluid className="h-50" style={{}}>
+    //     <Col
+    //       sm={12}
+    //       md={6}
+    //       style={{
+    //         backgroundColor: "#D3D3D3",
+    //       }}
+    //     >
+    // <Card
+    //   className="border-0"
+    //   style={{
+    //     backgroundColor: "#D3D3D3",
+    //     marginTop: "3vh",
+    //   }}
+    // >
+    //   <Card.Body>
+    //     <Card.Title
+    //       className="bg-dark text-white text-center"
+    //       style={{ fontSize: "22px" }}
+    //     >
+    //       Senpai
+    //     </Card.Title>
+    //     <Card.Text className="bg-light" style={{ fontSize: "16px" }}>
+    //       Senpai provides users a platform to purchase remote programming
+    //       tutoring. Pairing live video chat and a collaborative IDE, users
+    //       can pair program with a tutor - a Senpai. Many technologies were
+    //       used, including MongoDB, Express, and ReactJS. User
+    //       authentication is performed with Firebase, while payments and
+    //       price-setting are available through Stripe. The frontend was
+    //       built using Material UI. Published new iterations and updates
+    //       using Docker and GCP.
+    //     </Card.Text>
+    //   </Card.Body>
+    // </Card>
+    //     </Col>
+    //     <Col sm={12} md={6} style={{}}>
+    // <iframe
+    //   width="100%"
+    //   height="100%"
+    //   src="https://www.youtube.com/embed/DLzxrzFCyOs"
+    //   title="YouTube video player"
+    //   frameborder="0"
+    //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    //   allowfullscreen
+    // ></iframe>
+    //     </Col>
+    //   </Row>
+    // </Container>
     //Leaving this now to go back and add back in, or to possibly use the carousel...
     // <Container fluid style={{ backgroundColor: "white", height: "94.8vh" }}>
     //   <Row

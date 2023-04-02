@@ -5,7 +5,7 @@ import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 const Header = () => {
   return (
     <>
-      <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
         <Navbar.Toggle
           aria-controls="navbarScroll"
           data-bs-target="#navbarScroll"
@@ -47,10 +47,10 @@ const Header = () => {
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
-           <Container>
+            <Container>
               <Navbar.Brand className="brand" href="/music">
-               Music
-             </Navbar.Brand>
+                Music
+              </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
           </Nav>
