@@ -18,14 +18,13 @@ const Home = () => {
       fluid
       style={{
         // backgroundColor: "black",
-        // height: "92.2vh",
+        height: "92.2vh",
         width: "100%",
       }}
     >
       <Row
         style={
           {
-            // height: "49.5%",
             // backgroundColor: "lightblue"
           }
         }
@@ -33,11 +32,11 @@ const Home = () => {
         <Col
           sm={12}
           md={6}
-          style={
-            {
-              // backgroundColor: "lightpink"
-            }
-          }
+          style={{
+            height: "49.5%",
+
+            // backgroundColor: "lightpink"
+          }}
         >
           <Card
             style={{
@@ -71,6 +70,8 @@ const Home = () => {
           sm={12}
           md={6}
           style={{
+            height: "49.5%",
+
             backgroundColor: "#D3D3D3",
 
             // paddingBottom: "7vh",
@@ -113,7 +114,8 @@ const Home = () => {
       <Row
         style={{
           display: "flex",
-          // height: "50.5%",
+          height: "50.5%",
+
           // backgroundColor: "lightcoral",
         }}
       >
