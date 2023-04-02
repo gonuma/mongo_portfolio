@@ -5,7 +5,14 @@ import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 const Header = () => {
   return (
     <>
-      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="md"
+        bg="dark"
+        variant="dark"
+        fixed="top"
+        // style={{ paddingBottom: "2vh" }}
+      >
         <Navbar.Toggle
           aria-controls="navbarScroll"
           data-bs-target="#navbarScroll"
