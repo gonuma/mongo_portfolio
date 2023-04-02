@@ -18,18 +18,21 @@ const Home = () => {
       fluid
       style={{
         // backgroundColor: "black",
-        height: "92.2vh",
+        // height: "92.2vh",
         width: "100%",
       }}
     >
       <Row
-        style={{
-          height: "49.5%",
-          // backgroundColor: "lightblue"
-        }}
+        style={
+          {
+            // height: "49.5%",
+            // backgroundColor: "lightblue"
+          }
+        }
       >
         <Col
-          xs={6}
+          sm={12}
+          md={6}
           style={
             {
               // backgroundColor: "lightpink"
@@ -65,9 +68,11 @@ const Home = () => {
           </Card>
         </Col>
         <Col
-          xs={6}
+          sm={12}
+          md={6}
           style={{
             backgroundColor: "#D3D3D3",
+
             // paddingBottom: "7vh",
             // borderLeft: "2px dotted black",
           }}
@@ -86,6 +91,8 @@ const Home = () => {
             src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
           />
           <Col
+            // sm={12}
+            // md={6}
             style={{
               color: "black",
               fontStyle: "italic",
@@ -94,8 +101,8 @@ const Home = () => {
               borderBottom: "2px dotted black",
               marginLeft: "2vw",
               marginRight: "2vw",
-              // paddingLeft: "2vw",
-              // paddingRight: "2vw",
+              paddingLeft: "2vw",
+              paddingRight: "2vw",
             }}
           >
             The best time to plant a tree was 20 years ago. The second best time
@@ -106,12 +113,13 @@ const Home = () => {
       <Row
         style={{
           display: "flex",
-          height: "50.5%",
+          // height: "50.5%",
           // backgroundColor: "lightcoral",
         }}
       >
         <Col
-          xs={6}
+          sm={12}
+          md={6}
           style={{
             // backgroundColor: "brown",
             // borderTop: "2px dotted black",
@@ -147,14 +155,23 @@ const Home = () => {
           </Card>
         </Col>
         <Col
-          xs={6}
+          sm={12}
+          md={6}
           style={
             {
               // backgroundColor: "lightpink",
             }
           }
         >
-          Maybe an app demo/image can go here?
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.youtube.com/embed/DLzxrzFCyOs"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
         </Col>
       </Row>
     </Container>
