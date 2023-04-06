@@ -17,13 +17,13 @@ const Activity = require("./model/activity");
 //app.use(express.static(path.join(__dirname, "../build")));
 
 // Import SSL certs
-let certs = {
-  key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-};
+// let certs = {
+//   key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+//   cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+// };
 
 // Initialize HTTPS server
-let server = https.createServer(certs, app);
+// let server = https.createServer(certs, app);
 
 // CORS Settings
 const corsConfig = {
@@ -135,8 +135,8 @@ app.get("/spotify-refresh", async (req, res) => {
 //     });
 // });
 
-// Update activities in Database
-const updateActivities = cronJob.schedule("* * * * *", () => {
+// Update activities in Database Every Day
+const updateActivities = cronJob.schedule("0 0 * * *", () => {
   axios
     .post("https://www.strava.com/api/v3/oauth/token", {
       client_id: `${process.env.STRAVA_CLIENT_ID}`,
@@ -165,6 +165,7 @@ const updateActivities = cronJob.schedule("* * * * *", () => {
               type: activity.type,
               distance: activity.distance,
               activityID: activity.id,
+              startDate: activity.start_date_local,
             };
             if (!activities.find((item) => item.activityID === activity.id)) {
               const newActivity = new Activity({
@@ -174,13 +175,15 @@ const updateActivities = cronJob.schedule("* * * * *", () => {
                 type: activity.type,
                 distance: activity.distance,
                 activityID: activity.id,
+                startDate: activity.start_date_local,
               });
               Activity.create(newActivity);
-              console.log("New Activity Found and Added");
+              console.log("New activity found and registered.");
               console.log(activity);
-            } else {
-              console.log("Activity Found");
             }
+            // else {
+            //   console.log("Activity Found");
+            // }
           });
         });
     });
@@ -188,6 +191,7 @@ const updateActivities = cronJob.schedule("* * * * *", () => {
 
 updateActivities.start();
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  // console.log(`Running in ${process.env.NODE_ENV} environment`);
 });

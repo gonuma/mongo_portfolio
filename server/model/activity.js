@@ -9,11 +9,11 @@ const activitySchema = new Schema({
     require: true,
     unique: true,
   },
-  //   start_date: {
-  //     type: Date,
-  //     require: true,
-  //     unique: false,
-  //   },
+  startDate: {
+    type: Date,
+    require: true,
+    unique: false,
+  },
   achievements: {
     type: Number,
     require: false,
