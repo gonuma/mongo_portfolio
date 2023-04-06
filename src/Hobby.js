@@ -6,12 +6,16 @@ import Tabs from "react-bootstrap/Tabs";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import Music from "./Music.js";
 
 export default function Hobby() {
   const [refreshToken, setRefreshToken] = useState("");
   const [activities, setActivities] = useState([]);
   const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
+  const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
   const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
+  const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
 
   // Load Refresh Token
   // const getRefreshToken = async () => {
@@ -29,24 +33,37 @@ export default function Hobby() {
 
   const cyclingDistanceCalculator = async () => {
     let tempActivities = await activities;
-    let tempDistance = 0;
+    let tempTotalDistance = 0;
+    let tempYearlyDistance = 0;
+
     tempActivities.map((activity) => {
       if (activity.type === "Ride") {
-        tempDistance += activity.distance;
+        tempTotalDistance += activity.distance;
+        // console.log(activity.startDate);
+        if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
+          tempYearlyDistance += activity.distance;
+        }
       }
     });
-    setTotalDistanceCycling(tempDistance / 1000); // Convert distance from meters to kilometers
+    setTotalDistanceCycling(tempTotalDistance / 1000); // Convert distance from meters to kilometers
+    setYearlyDistanceCycling(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
   };
 
   const runningDistanceCalculator = async () => {
     let tempActivities = await activities;
-    let tempDistance = 0;
+    let tempTotalDistance = 0;
+    let tempYearlyDistance = 0;
+
     tempActivities.map((activity) => {
       if (activity.type === "Run") {
-        tempDistance += activity.distance;
+        tempTotalDistance += activity.distance;
+        if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
+          tempYearlyDistance += activity.distance;
+        }
       }
     });
-    setTotalDistanceRunning(tempDistance / 1000); // Convert distance from meters to kilometers
+    setTotalDistanceRunning(tempTotalDistance / 1000); // Convert distance from meters to kilometers
+    setYearlyDistanceRunning(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
   };
 
   // const callActivities = async () => {
@@ -93,13 +110,9 @@ export default function Hobby() {
         className="mb-3"
       >
         <Tab eventKey="cycling" title="Cycling">
-          <p>
-            My sit-bones hurt. I try to make time whenever possible to go
-            cycling, and am training for a 100km ride. (I've been saying this
-            for 2 years)
-          </p>
-          <Button
+          {/* <Button
             variant="primary"
+            style={{ margin: "1vh" }}
             onClick={() => {
               activities.map((activity) => {
                 if (activity.type === "Ride") {
@@ -109,14 +122,48 @@ export default function Hobby() {
               console.log(totalDistanceCycling);
             }}
           >
-            Rides
-          </Button>
-          <h1>{Math.ceil(totalDistanceCycling)} km</h1>
+            Log Rides
+          </Button> */}
+          <p>
+            My sit-bones hurt. I try to make time whenever possible to go
+            cycling, and am training for a 100km ride. (I've been saying this
+            for 2 years)
+          </p>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                Lifetime Distance: {Math.ceil(totalDistanceCycling)} km
+                <ProgressBar
+                  now={Math.ceil(totalDistanceCycling)}
+                  max={382500}
+                />
+              </Card.Title>
+              <Card.Text>
+                {((totalDistanceCycling / 382500) * 100).toFixed(6)}% of the way
+                to the moon
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                2023 Distance: {Math.ceil(yearlyDistanceCycling)} km
+                <ProgressBar
+                  now={Math.ceil(yearlyDistanceCycling)}
+                  max={1000}
+                />
+              </Card.Title>
+              <Card.Text>
+                {((yearlyDistanceCycling / 1000) * 100).toFixed(1)}% of yearly
+                goal (1000 km)
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </Tab>
         <Tab eventKey="running" title="Running">
-          <p>I hate running, but I do it enough to warrant putting it here.</p>
-          <Button
+          {/* <Button
             variant="primary"
+            style={{ margin: "1vh" }}
             onClick={() => {
               activities.map((activity) => {
                 if (activity.type === "Run") {
@@ -126,14 +173,46 @@ export default function Hobby() {
               console.log(totalDistanceRunning);
             }}
           >
-            Runs
-          </Button>
-          <h1>{Math.ceil(totalDistanceRunning)} km</h1>
+            Log Runs
+          </Button> */}
+          <p>I hate running, but I do it enough to warrant putting it here.</p>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                Lifetime Distance: {Math.ceil(totalDistanceRunning)} km
+                <ProgressBar
+                  now={Math.ceil(totalDistanceRunning)}
+                  max={382500}
+                />
+              </Card.Title>
+              <Card.Text>
+                {((totalDistanceRunning / 382500) * 100).toFixed(6)}% of the way
+                to the moon
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                2023 Distance: {Math.ceil(yearlyDistanceRunning)} km
+                <ProgressBar
+                  now={Math.ceil(yearlyDistanceRunning)}
+                  max={1000}
+                />
+              </Card.Title>
+              <Card.Text>
+                {((yearlyDistanceRunning / 300) * 100).toFixed(1)}% of yearly
+                goal (300 km)
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          {/* <h1>Lifetime Distance: {Math.ceil(totalDistanceRunning)} km</h1>
+          <h1>2023 Distance: {Math.ceil(yearlyDistanceRunning)} km</h1> */}
         </Tab>
         <Tab eventKey="lifting" title="Weight Lifting">
-          <p>I'm working on gettin' swole.</p>
-          <Button
+          {/* <Button
             variant="primary"
+            style={{ margin: "1vh" }}
             onClick={() => {
               activities.map((activity) => {
                 if (activity.type === "WeightTraining") {
@@ -142,8 +221,13 @@ export default function Hobby() {
               });
             }}
           >
-            Lifting Sessions
-          </Button>
+            Log Lifting Sessions
+          </Button> */}
+          <p>I'm working on gettin' swole.</p>
+        </Tab>
+        <Tab eventKey="music" title="Music">
+          I listen to a large variety of music, and am not too bad at karaoke.
+          <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
           I play a lot of videogames...

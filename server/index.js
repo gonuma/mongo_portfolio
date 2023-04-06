@@ -17,13 +17,13 @@ const Activity = require("./model/activity");
 //app.use(express.static(path.join(__dirname, "../build")));
 
 // Import SSL certs
-// let certs = {
-//   key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-//   cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-// };
+let certs = {
+  key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+  cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+};
 
 // Initialize HTTPS server
-// let server = https.createServer(certs, app);
+let server = https.createServer(certs, app);
 
 // CORS Settings
 const corsConfig = {
@@ -145,7 +145,7 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
       refresh_token: `${process.env.STRAVA_REFRESH_TOKEN}`,
     })
     .then((res) => {
-      fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=90`, {
+      fetch(`https://www.strava.com/api/v3/athlete/activities?per_page=200`, {
         headers: {
           Accept: "application/json",
           Authorization: "Bearer " + res.data.access_token,
@@ -158,15 +158,6 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
           const activities = await Activity.find({}, { _id: 0 });
           // console.log("All Activites: ", activities);
           res.map((activity) => {
-            const tempActivity = {
-              achievements: activity.achievement_count,
-              averageSpeed: activity.average_speed,
-              averageHeartRate: activity.average_heartrate,
-              type: activity.type,
-              distance: activity.distance,
-              activityID: activity.id,
-              startDate: activity.start_date_local,
-            };
             if (!activities.find((item) => item.activityID === activity.id)) {
               const newActivity = new Activity({
                 achievements: activity.achievement_count,
@@ -191,7 +182,7 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
 
 updateActivities.start();
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   // console.log(`Running in ${process.env.NODE_ENV} environment`);
 });
