@@ -17,13 +17,13 @@ const Activity = require("./model/activity");
 //app.use(express.static(path.join(__dirname, "../build")));
 
 // Import SSL certs
-let certs = {
-  key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-};
+// let certs = {
+//   key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+//   cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+// };
 
 // Initialize HTTPS server
-let server = https.createServer(certs, app);
+// let server = https.createServer(certs, app);
 
 // CORS Settings
 const corsConfig = {
@@ -182,7 +182,7 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
 
 updateActivities.start();
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   // console.log(`Running in ${process.env.NODE_ENV} environment`);
 });

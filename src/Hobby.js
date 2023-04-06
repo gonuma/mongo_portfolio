@@ -16,6 +16,7 @@ export default function Hobby() {
   const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
   const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
   const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
+  const [sessions, setSessions] = useState(0);
 
   // Load Refresh Token
   // const getRefreshToken = async () => {
@@ -66,6 +67,19 @@ export default function Hobby() {
     setYearlyDistanceRunning(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
   };
 
+  const sessionCalculator = async () => {
+    let tempActivities = await activities;
+    let tempSessions = 0;
+
+    tempActivities.map((activity) => {
+      if (activity.type === "WeightTraining") {
+        tempSessions += 1;
+        console.log(activity);
+      }
+    });
+    setSessions(tempSessions);
+  };
+
   // const callActivities = async () => {
   //   await fetch(
   //     `https://www.strava.com/api/v3/athlete/activities?per_page=90`,
@@ -93,6 +107,7 @@ export default function Hobby() {
   useEffect(() => {
     cyclingDistanceCalculator();
     runningDistanceCalculator();
+    sessionCalculator();
   }, [activities]);
 
   return (
@@ -224,9 +239,14 @@ export default function Hobby() {
             Log Lifting Sessions
           </Button> */}
           <p>I'm working on gettin' swole.</p>
+          <Card>
+            <Card.Body>
+              <Card.Title>{sessions} sessions</Card.Title>
+              <Card.Text>What else do I put here?</Card.Text>
+            </Card.Body>
+          </Card>
         </Tab>
         <Tab eventKey="music" title="Music">
-          I listen to a large variety of music, and am not too bad at karaoke.
           <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">

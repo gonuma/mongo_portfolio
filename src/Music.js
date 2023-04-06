@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
+import Card from "react-bootstrap/Card";
 
 const Music = () => {
   const [artists, setArtists] = useState([]);
@@ -70,6 +71,18 @@ const Music = () => {
         >
           <h1>Greg's Top Artists...</h1>
         </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>
+            I listen to a large variety of music, and I'm not too bad at
+            karaoke.
+          </p>
+        </div>
         <Row>
           <Carousel>
             {artists.map((artist) => {
@@ -81,8 +94,8 @@ const Music = () => {
                     fluid
                     className="align-items-center"
                     style={{
-                      maxHeight: "50vh",
-                      maxWidth: "90vw",
+                      maxHeight: "65vh",
+                      maxWidth: "100vw",
                       padding: "1vh",
                       display: "block",
                       margin: "auto",
@@ -93,7 +106,7 @@ const Music = () => {
                         display: "flex",
                         marginLeft: "auto",
                         marginRight: "auto",
-                        height: "50vh",
+                        height: "65vh",
                       }}
                       src={artist.images[0].url}
                     />
