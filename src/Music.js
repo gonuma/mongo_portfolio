@@ -12,12 +12,10 @@ const Music = () => {
   const [isLoading, setLoading] = useState(true);
   let token = [refreshToken[0]];
 
-  // Load Refreshed Token
+  // Load Refresh Token
   const getRefreshToken = async () => {
     const response = await axios.get(
-        "//" +
-        window.location.hostname +
-        ":5000/refresh"
+      "//" + window.location.hostname + ":5000/spotify-refresh"
     );
     setRefreshToken(response.data.access_token);
   };
@@ -43,9 +41,11 @@ const Music = () => {
   useEffect(() => {
     getRefreshToken();
   }, []);
+
   useEffect(() => {
     loadArtists();
   }, token);
+
   if (isLoading) {
     return (
       <div
@@ -55,7 +55,7 @@ const Music = () => {
           alignItems: "center",
         }}
       >
-        <h1>Loading...</h1>;
+        <h1>Loading...</h1>
       </div>
     );
   } else if (artists && artists.length > 0) {

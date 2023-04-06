@@ -6,51 +6,28 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 
 export default function Notes() {
-  const categories = [];
   const [articles, setArticles] = useState([]);
   const [article, setArticle] = useState("");
 
   const loadArticles = async () => {
-    const response = await axios.get(
-        "//" +
-        window.location.hostname +
-        ":5000/articles"
-    );
-    setArticles(response.data);
+    await fetch("//" + window.location.hostname + ":5000/articles")
+      // const response = await axios
+      //   .get("//" + window.location.hostname + ":5000/articles")
+      .then((res) => res.json())
+      .then((data) => {
+        setArticles(data);
+      });
   };
-
-  // const setCategories = () => {
-  //   categories.map((category, index) => {
-  //     console.log(category);
-  //     return (
-  //       <Accordion.Item eventKey={index}>
-  //         <Accordion.Header>{category}</Accordion.Header>
-  //         <Accordion.Body></Accordion.Body>
-  //       </Accordion.Item>
-  //     );
-  //   });
-  // };
-
-  // const loadCategories = async () => {
-  //   await articles.map((article, index) => {
-  //     if (!categories.includes(article.category)) {
-  //       categories.push(article.category);
-  //     } else {
-  //       setCategories();
-  //     }
-  //   });
-  // };
 
   useEffect(() => {
     loadArticles();
   }, []);
 
-  // useEffect(() => {
-  //   loadCategories();
-  // });
-
   return (
     <Container>
+      {/* <button onClick={() => console.log(articles)}>Articles</button> */}
+      {/* <button onClick={() => console.log(categories)}>Categories</button> */}
+
       <Image
         fluid
         style={{
@@ -62,6 +39,7 @@ export default function Notes() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
       />
+
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Hardware</Accordion.Header>
@@ -197,7 +175,7 @@ export default function Notes() {
           let target = document.getElementById("article");
           return (target.innerText = article);
         }}
-      >
+        >
         test
       </button> */}
     </Container>
