@@ -182,6 +182,23 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
 
 updateActivities.start();
 
+// Pull recently played Steam Games
+app.get("/games", async (req, res) => {
+  await fetch(
+    `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&format=json`
+  )
+    .then((response) => response.json())
+    .then((data) => res.send(data));
+
+  // try {
+  //   const data = res.json();
+  //   res.send(data);
+  // } catch (error) {
+  //   console.log(error);
+  // }
+});
+// console.log(res);
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   // console.log(`Running in ${process.env.NODE_ENV} environment`);

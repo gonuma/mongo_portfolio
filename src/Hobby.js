@@ -10,13 +10,14 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Music from "./Music.js";
 
 export default function Hobby() {
-  const [refreshToken, setRefreshToken] = useState("");
+  // const [refreshToken, setRefreshToken] = useState("");
   const [activities, setActivities] = useState([]);
   const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
   const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
   const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
   const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
   const [sessions, setSessions] = useState(0);
+  const [recentGames, setRecentGames] = useState([]);
 
   // Load Refresh Token
   // const getRefreshToken = async () => {
@@ -24,6 +25,21 @@ export default function Hobby() {
   //     "//" + window.location.hostname + ":5000/strava-refresh"
   //   );
   //   setRefreshToken(response.data.access_token);
+  // };
+
+  const loadGames = async () => {
+    await fetch("//" + window.location.hostname + ":5000/games")
+      .then((res) => res.json())
+      .then((data) => {
+        setRecentGames(data.response);
+        // console.log(data.response);
+      });
+    // .then(() => console.log(recentGames.games));
+  };
+
+  // const gameParser = async (data) => {
+  //   await recentGames;
+  //   console.log(recentGames);
   // };
 
   const loadActivities = async () => {
@@ -74,7 +90,7 @@ export default function Hobby() {
     tempActivities.map((activity) => {
       if (activity.type === "WeightTraining") {
         tempSessions += 1;
-        console.log(activity);
+        // console.log(activity);
       }
     });
     setSessions(tempSessions);
@@ -102,6 +118,7 @@ export default function Hobby() {
 
   useEffect(() => {
     loadActivities();
+    loadGames();
   }, []);
 
   useEffect(() => {
@@ -176,20 +193,6 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="running" title="Running">
-          {/* <Button
-            variant="primary"
-            style={{ margin: "1vh" }}
-            onClick={() => {
-              activities.map((activity) => {
-                if (activity.type === "Run") {
-                  console.log(activity);
-                }
-              });
-              console.log(totalDistanceRunning);
-            }}
-          >
-            Log Runs
-          </Button> */}
           <p>I hate running, but I do it enough to warrant putting it here.</p>
           <Card>
             <Card.Body>
@@ -221,23 +224,8 @@ export default function Hobby() {
               </Card.Text>
             </Card.Body>
           </Card>
-          {/* <h1>Lifetime Distance: {Math.ceil(totalDistanceRunning)} km</h1>
-          <h1>2023 Distance: {Math.ceil(yearlyDistanceRunning)} km</h1> */}
         </Tab>
         <Tab eventKey="lifting" title="Weight Lifting">
-          {/* <Button
-            variant="primary"
-            style={{ margin: "1vh" }}
-            onClick={() => {
-              activities.map((activity) => {
-                if (activity.type === "WeightTraining") {
-                  console.log(activity);
-                }
-              });
-            }}
-          >
-            Log Lifting Sessions
-          </Button> */}
           <p>I'm working on gettin' swole.</p>
           <Card>
             <Card.Body>
@@ -251,6 +239,28 @@ export default function Hobby() {
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
           I play a lot of videogames...
+          <Button onClick={() => console.log(recentGames)}>Games</Button>
+          {async () => {
+            let games = await recentGames;
+            games.map((game, index) => {
+              {
+                if (game) {
+                  console.log(game);
+                  // <p>{game.name}</p>;
+                }
+              }
+            });
+          }}
+          {/* {async () => await recentGames.games.map((game) => console.log(game))} */}
+          {/* <div>
+            {async () => {
+              recentGames.response.games.map((game) => {
+                if (game.name) {
+                  return <p>{game.name}</p>;
+                }
+              });
+            }}
+          </div> */}
         </Tab>
       </Tabs>
       {/* <Image

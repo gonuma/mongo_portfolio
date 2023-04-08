@@ -86,10 +86,10 @@ const Music = () => {
         <Row>
           <Carousel>
             {artists.map((artist) => {
-              console.log(artist.name);
-              console.log(artist.images[2].url);
+              // console.log(artist.name);
+              // console.log(artist.images[2].url);
               return (
-                <Carousel.Item>
+                <Carousel.Item key={`${artist.name}`}>
                   <Col
                     fluid
                     className="align-items-center"
