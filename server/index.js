@@ -8,22 +8,30 @@ const Article = require("./model/article");
 const request = require("request");
 const axios = require("axios");
 const path = require("path");
-let https = require("https");
-let fs = require("fs");
+const https = require("https");
+const fs = require("fs");
+const activity_log = fs.createWriteStream(
+  __dirname + "/../logs/activities.log",
+  { flags: "w" }
+);
+const log_stdout = process.stdout;
+const util = require("util");
 const fetch = require("node-fetch");
 const cronJob = require("node-cron");
 const Activity = require("./model/activity");
 
 //app.use(express.static(path.join(__dirname, "../build")));
 
-// Import SSL certs
-// let certs = {
-//   key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-//   cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-// };
+if (process.env.NODE_ENV === "production") {
+  // Import SSL certs
+  let certs = {
+    key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+  };
 
-// Initialize HTTPS server
-// let server = https.createServer(certs, app);
+  // Initialize HTTPS server
+  let server = https.createServer(certs, app);
+}
 
 // CORS Settings
 const corsConfig = {
@@ -32,15 +40,6 @@ const corsConfig = {
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
-
-// Previous attempt at CORS. Reduntant with above, correct?
-//app.use(function (req, res, next) {
-//  res.header("Access-Control-Allow-Origin", "*");
-//  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//  res.header("Access-Control-Allow-Headers", "Content-Type");
-//  res.header("Access-Control-Allow-Credentials", true);
-//  next();
-//});
 
 app.use(cors(corsConfig));
 app.use(express.json());
@@ -136,7 +135,7 @@ app.get("/spotify-refresh", async (req, res) => {
 // });
 
 // Update activities in Database Every Day
-const updateActivities = cronJob.schedule("0 0 * * *", () => {
+const updateActivities = cronJob.schedule("0 0 * * 0,2,4", () => {
   axios
     .post("https://www.strava.com/api/v3/oauth/token", {
       client_id: `${process.env.STRAVA_CLIENT_ID}`,
@@ -170,7 +169,8 @@ const updateActivities = cronJob.schedule("0 0 * * *", () => {
               });
               Activity.create(newActivity);
               console.log("New activity found and registered.");
-              console.log(activity);
+              activity_log.write(util.format(activity) + "\n");
+              log_stdout.write(util.format(activity) + "\n");
             }
             // else {
             //   console.log("Activity Found");
@@ -198,8 +198,13 @@ app.get("/games", async (req, res) => {
   // }
 });
 // console.log(res);
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-  // console.log(`Running in ${process.env.NODE_ENV} environment`);
-});
+if (process.env.NODE_ENV === "production") {
+  server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+    // console.log(`Running in ${process.env.NODE_ENV} environment`);
+  });
+} else {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
