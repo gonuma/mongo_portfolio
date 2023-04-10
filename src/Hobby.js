@@ -6,8 +6,10 @@ import Tabs from "react-bootstrap/Tabs";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Carousel from "react-bootstrap/Carousel";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Music from "./Music.js";
+import { CarouselItem } from "react-bootstrap";
 
 export default function Hobby() {
   // const [refreshToken, setRefreshToken] = useState("");
@@ -31,16 +33,9 @@ export default function Hobby() {
     await fetch("//" + window.location.hostname + ":5000/games")
       .then((res) => res.json())
       .then((data) => {
-        setRecentGames(data.response);
-        // console.log(data.response);
+        setRecentGames(data.games);
       });
-    // .then(() => console.log(recentGames.games));
   };
-
-  // const gameParser = async (data) => {
-  //   await recentGames;
-  //   console.log(recentGames);
-  // };
 
   const loadActivities = async () => {
     await fetch("//" + window.location.hostname + ":5000/activities")
@@ -56,7 +51,6 @@ export default function Hobby() {
     tempActivities.map((activity) => {
       if (activity.type === "Ride") {
         tempTotalDistance += activity.distance;
-        // console.log(activity.startDate);
         if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
           tempYearlyDistance += activity.distance;
         }
@@ -90,34 +84,16 @@ export default function Hobby() {
     tempActivities.map((activity) => {
       if (activity.type === "WeightTraining") {
         tempSessions += 1;
-        // console.log(activity);
       }
     });
     setSessions(tempSessions);
   };
 
-  // const callActivities = async () => {
-  //   await fetch(
-  //     `https://www.strava.com/api/v3/athlete/activities?per_page=90`,
-  //     {
-  //       headers: {
-  //         Accept: "application/json",
-  //         Authorization: "Bearer " + refreshToken,
-  //         "Content-Type": "application/json",
-  //       },
-  //       method: "GET",
-  //     }
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => setActivities(data));
-  // };
-
-  // useEffect(() => {
-  //   getRefreshToken();
-  // }, []);
-
   useEffect(() => {
     loadActivities();
+  }, []);
+
+  useEffect(() => {
     loadGames();
   }, []);
 
@@ -129,38 +105,23 @@ export default function Hobby() {
 
   return (
     <Container>
-      <Button
-        variant="info"
-        style={{ margin: "1vh" }}
-        onClick={() => console.log(activities)}
-      >
-        Log All Activities
-      </Button>
       <Tabs
         defaultActiveKey="cycling"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
         <Tab eventKey="cycling" title="Cycling">
-          {/* <Button
-            variant="primary"
-            style={{ margin: "1vh" }}
-            onClick={() => {
-              activities.map((activity) => {
-                if (activity.type === "Ride") {
-                  console.log(activity);
-                }
-              });
-              console.log(totalDistanceCycling);
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            Log Rides
-          </Button> */}
-          <p>
             My sit-bones hurt. I try to make time whenever possible to go
             cycling, and am training for a 100km ride. (I've been saying this
             for 2 years)
-          </p>
+          </div>
           <Card>
             <Card.Body>
               <Card.Title>
@@ -193,7 +154,15 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="running" title="Running">
-          <p>I hate running, but I do it enough to warrant putting it here.</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            I hate running, but I do it enough to warrant putting it here.
+          </div>
           <Card>
             <Card.Body>
               <Card.Title>
@@ -226,11 +195,22 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="lifting" title="Weight Lifting">
-          <p>I'm working on gettin' swole.</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            I'm working on gettin' swole.
+          </div>
           <Card>
             <Card.Body>
               <Card.Title>{sessions} sessions</Card.Title>
-              <Card.Text>What else do I put here?</Card.Text>
+              <Card.Text>
+                What else do I even put here? Maybe I can put total amount of
+                squats or something...
+              </Card.Text>
             </Card.Body>
           </Card>
         </Tab>
@@ -238,54 +218,38 @@ export default function Hobby() {
           <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
-          I play a lot of videogames...
-          <Button onClick={() => console.log(recentGames)}>Games</Button>
-          {async () => {
-            let games = await recentGames;
-            games.map((game, index) => {
-              {
-                if (game) {
-                  console.log(game);
-                  // <p>{game.name}</p>;
-                }
-              }
-            });
-          }}
-          {/* {async () => await recentGames.games.map((game) => console.log(game))} */}
-          {/* <div>
-            {async () => {
-              recentGames.response.games.map((game) => {
-                if (game.name) {
-                  return <p>{game.name}</p>;
-                }
-              });
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          </div> */}
+          >
+            I play a lot of videogames. Here are some I've been playing over the
+            past couple of weeks...
+          </div>
+          <Carousel>
+            {recentGames.map((game, index) => {
+              return (
+                <CarouselItem key={`${game.name}`}>
+                  <Card className="align-items-center border-0">
+                    <Card.Body>
+                      <Card.Title>
+                        {game.name}
+                        <Card.Img
+                          // style={{ height: "45vh", width: "auto" }}
+                          src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
+                        />
+                        {/* <Button onClick={() => console.log(game)}>Test</Button> */}
+                      </Card.Title>
+                    </Card.Body>
+                  </Card>
+                </CarouselItem>
+              );
+            })}
+          </Carousel>
         </Tab>
       </Tabs>
-      {/* <Image
-        fluid
-        style={{
-          maxHeight: "50vh",
-          maxWidth: "90vw",
-          padding: "1vh",
-          display: "block",
-          margin: "auto",
-        }}
-        src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/bike.jpg"
-      />
-      <p
-        style={{
-          textAlign: "left",
-          backgroundColor: "lightblue",
-        }}
-      >
-        I plan to talk about my many hobbies on this page, including cycling,
-        weight lifting, videogames, and all things IT. Over the years, I've
-        tried a huge number of sports, including swimming, water polo, fencing,
-        baseball, and fencing, but of all of the sports I've done, the one that
-        has made the largest impact in my life is cycling.
-      </p> */}
     </Container>
   );
 }

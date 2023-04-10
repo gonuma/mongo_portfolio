@@ -22,16 +22,14 @@ const Activity = require("./model/activity");
 
 //app.use(express.static(path.join(__dirname, "../build")));
 
-if (process.env.NODE_ENV === "production") {
-  // Import SSL certs
-  let certs = {
-    key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-  };
+// Import SSL certs
+let certs = {
+  key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+  cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+};
 
-  // Initialize HTTPS server
-  let server = https.createServer(certs, app);
-}
+// Initialize HTTPS server
+let server = https.createServer(certs, app);
 
 // CORS Settings
 const corsConfig = {
@@ -115,25 +113,6 @@ app.get("/spotify-refresh", async (req, res) => {
     .then((data) => res.send(data));
 });
 
-// Generate Strava Access Token & Update Activities
-
-// app.get("/strava-refresh", async (req, res) => {
-//   axios
-//     .post("https://www.strava.com/api/v3/oauth/token", {
-//       client_id: `${process.env.STRAVA_CLIENT_ID}`,
-//       client_secret: `${process.env.STRAVA_CLIENT_SECRET}`,
-//       grant_type: `refresh_token`,
-//       refresh_token: `${process.env.STRAVA_REFRESH_TOKEN}`,
-//     })
-//     .then((response) => {
-//       // console.log(response);
-//       res.send(response.data);
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//     });
-// });
-
 // Update activities in Database Every Day
 const updateActivities = cronJob.schedule("0 0 * * 0,2,4", () => {
   axios
@@ -185,26 +164,11 @@ updateActivities.start();
 // Pull recently played Steam Games
 app.get("/games", async (req, res) => {
   await fetch(
-    `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&format=json`
+    `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&count=7&format=json`
   )
     .then((response) => response.json())
-    .then((data) => res.send(data));
-
-  // try {
-  //   const data = res.json();
-  //   res.send(data);
-  // } catch (error) {
-  //   console.log(error);
-  // }
+    .then((data) => res.send(data.response));
 });
-// console.log(res);
-if (process.env.NODE_ENV === "production") {
-  server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-    // console.log(`Running in ${process.env.NODE_ENV} environment`);
-  });
-} else {
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-}
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
