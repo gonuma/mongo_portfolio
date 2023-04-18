@@ -12,7 +12,6 @@ import Music from "./Music.js";
 import { CarouselItem } from "react-bootstrap";
 
 export default function Hobby() {
-  // const [refreshToken, setRefreshToken] = useState("");
   const [activities, setActivities] = useState([]);
   const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
   const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
@@ -21,19 +20,11 @@ export default function Hobby() {
   const [sessions, setSessions] = useState(0);
   const [recentGames, setRecentGames] = useState([]);
 
-  // Load Refresh Token
-  // const getRefreshToken = async () => {
-  //   const response = await axios.get(
-  //     "//" + window.location.hostname + ":5000/strava-refresh"
-  //   );
-  //   setRefreshToken(response.data.access_token);
-  // };
-
   const loadGames = async () => {
     await fetch("//" + window.location.hostname + ":5000/games")
       .then((res) => res.json())
       .then((data) => {
-        setRecentGames(data.games);
+        setRecentGames(data);
       });
   };
 
@@ -228,6 +219,7 @@ export default function Hobby() {
             I play a lot of videogames. Here are some I've been playing over the
             past couple of weeks...
           </div>
+          {/* <Button onClick={() => console.log(recentGames)}>Game List</Button> */}
           <Carousel>
             {recentGames.map((game, index) => {
               return (
@@ -237,11 +229,10 @@ export default function Hobby() {
                       <Card.Title>
                         {game.name}
                         <Card.Img
-                          // style={{ height: "45vh", width: "auto" }}
                           src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
                         />
-                        {/* <Button onClick={() => console.log(game)}>Test</Button> */}
                       </Card.Title>
+                      <Card.Text>{game.description}</Card.Text>
                     </Card.Body>
                   </Card>
                 </CarouselItem>

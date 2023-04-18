@@ -6,6 +6,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Article = require("./model/article");
 const request = require("request");
+const requestPromise = require("request-promise");
+const cheerio = require("cheerio");
 const axios = require("axios");
 const path = require("path");
 const https = require("https");
@@ -19,6 +21,13 @@ const util = require("util");
 const fetch = require("node-fetch");
 const cronJob = require("node-cron");
 const Activity = require("./model/activity");
+const {
+  Scraper,
+  Root,
+  DownloadContent,
+  OpenLinks,
+  CollectContent,
+} = require("nodejs-web-scraper");
 
 //app.use(express.static(path.join(__dirname, "../build")));
 
@@ -113,7 +122,7 @@ app.get("/spotify-refresh", async (req, res) => {
     .then((data) => res.send(data));
 });
 
-// Update activities in Database Every Day
+// Update activities in Database Every Sunday, Tuesday, Thursday at Midnight
 const updateActivities = cronJob.schedule("0 0 * * 0,2,4", () => {
   axios
     .post("https://www.strava.com/api/v3/oauth/token", {
@@ -161,14 +170,37 @@ const updateActivities = cronJob.schedule("0 0 * * 0,2,4", () => {
 
 updateActivities.start();
 
-// Pull recently played Steam Games
+// Pull recently played Steam Games & scrape for descriptions
 app.get("/games", async (req, res) => {
   await fetch(
     `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&count=7&format=json`
   )
     .then((response) => response.json())
-    .then((data) => res.send(data.response));
+    .then((data) => {
+      let finalData = [];
+
+      data.response.games.forEach((game) => {
+        requestPromise(`https://store.steampowered.com/app/${game.appid}`).then(
+          (html) => {
+            if (data.response.games.length <= 1) {
+              console.log("Data compiled");
+              res.send(finalData);
+            }
+            let $ = cheerio.load(html);
+            finalData.push({
+              appid: game.appid,
+              name: game.name,
+              img_icon_url: game.img_icon_url,
+              description: $(".game_description_snippet").text(),
+            });
+
+            data.response.games.shift();
+          }
+        );
+      });
+    });
 });
+
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
