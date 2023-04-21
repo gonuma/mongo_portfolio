@@ -226,7 +226,7 @@ export default function Hobby() {
                 <CarouselItem key={`${game.name}`}>
                   <Card className="align-items-center border-0">
                     <Card.Body>
-                      <Card.Title>
+                      <Card.Title className="text-center">
                         {game.name}
                         <Card.Img
                           src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}

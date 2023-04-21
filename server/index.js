@@ -268,7 +268,7 @@ app.get("/games", async (req, res) => {
 
             data.response.games.shift();
             if (data.response.games.length <= 0) {
-              console.log("Data compiled");
+              // console.log("Data compiled");
               res.send(finalData);
             }
           }

@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Carousel, Col, Row } from "react-bootstrap";
 
 export default function Study() {
   const [articles, setArticles] = useState([]);
@@ -37,7 +37,7 @@ export default function Study() {
     <Container>
       {/* <button onClick={() => console.log(articles)}>Articles</button> */}
       {/* <button onClick={() => console.log(categories)}>Categories</button> */}
-      <Button onClick={() => console.log(badges)}>Log Badges</Button>
+      {/* <Button onClick={() => console.log(badges)}>Log Badges</Button> */}
       <Image
         fluid
         style={{
@@ -49,7 +49,7 @@ export default function Study() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
       />
-      <Accordion alwaysOpen>
+      {/* <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Hardware</Accordion.Header>
           <Accordion.Body>
@@ -178,51 +178,56 @@ export default function Study() {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <p id="article"></p>
+      <p id="article"></p> */}
 
       {/* Badge Showcase */}
-      <Card className="text-center" style={{ backgroundColor: "#212529" }}>
+      <Card
+        className="text-center flex-column"
+        style={{ backgroundColor: "#212529" }}
+      >
         <Card.Body>
           <Card.Title style={{ color: "white" }}>TryHackMe Badges</Card.Title>
-          <Col
-            // xs={6}
-            className="d-flex"
-            // style={{ height: "15vh" }}
-          >
-            {badges.map((badge) => {
+          <Carousel>
+            {/* <Container className="" style={{ width: "50%" }}> */}
+            {badges.map((badge, index) => {
               return (
-                <Container className="d-flex">
-                  <Row className="align-items-center">
-                    <Col>
-                      <Card
-                        style={{
-                          marginLeft: "auto",
-                          marginRight: "auto",
-                          height: "35vh",
-                        }}
-                      >
-                        <Card.Body className="text-center">
-                          <Card.Title>{badge.name}</Card.Title>
-                          <Card.Text>{badge.description}</Card.Text>
-                          <Image
-                            fluid
-                            style={{
-                              marginTop: "2vh",
-                              marginBottom: "1vh",
-                              width: "30%",
-                              height: "auto",
-                            }}
-                            src={`https://tryhackme.com${badge.img_icon_url}`}
-                          />
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  </Row>
-                </Container>
-                // < src={`https://tryhackme.com${badge.img_icon_url}`} />
+                <Carousel.Item key={`${badge.name}`}>
+                  <Col className="align-items-center">
+                    {/* <Col xs={12}>
+                      <Button onClick={() => console.log(index)}>
+                      Index Test
+                    </Button> */}
+                    <Card
+                      style={
+                        {
+                          // marginLeft: "auto",
+                          // marginRight: "auto",
+                          // height: "35vh",
+                        }
+                      }
+                    >
+                      <Card.Body className="text-center">
+                        <Card.Title>{badge.name}</Card.Title>
+                        <Card.Text>{badge.description}</Card.Text>
+                        <Image
+                          fluid
+                          style={{
+                            marginTop: "2vh",
+                            marginBottom: "1vh",
+                            width: "30%",
+                            height: "auto",
+                          }}
+                          src={`https://tryhackme.com${badge.img_icon_url}`}
+                        />
+                      </Card.Body>
+                    </Card>
+                    {/* </Col> */}
+                  </Col>
+                </Carousel.Item>
               );
             })}
-          </Col>
+          </Carousel>
+          {/* </Container> */}
         </Card.Body>
       </Card>
     </Container>
