@@ -8,7 +8,7 @@ import App from "./App.js";
 import Header from "./Header";
 import Home from "./Home";
 import Music from "./Music";
-import Notes from "./Notes";
+import Study from "./Study";
 import Hobby from "./Hobby";
 import Article from "./pages/Article";
 
@@ -21,7 +21,7 @@ root.render(
         <Route path="/" element={<Home />} />
         <Route path="/music" element={<Music />} />
         <Route path="/hobby" element={<Hobby />} />
-        <Route path="/notes" element={<Notes />} />
+        <Route path="/study" element={<Study />} />
         {/* Append article title or ID to /article endpoint */}
         <Route path="/article" element={<Article />} />
       </Routes>

@@ -41,8 +41,8 @@ const Header = () => {
             {/* </NavLink> */}
             {/* <NavLink> */}
             <Container style={{ textAlign: "right" }}>
-              <Navbar.Brand className="brand" href="/notes">
-                Study Notes
+              <Navbar.Brand className="brand" href="/study">
+                Study
               </Navbar.Brand>
             </Container>
             {/* </NavLink> */}

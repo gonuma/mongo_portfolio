@@ -5,9 +5,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Article = require("./model/article");
+const Activity = require("./model/activity");
+const Badge = require("./model/badge");
 const request = require("request");
 const requestPromise = require("request-promise");
 const cheerio = require("cheerio");
+const puppet = require("puppeteer");
 const axios = require("axios");
 const path = require("path");
 const https = require("https");
@@ -20,7 +23,6 @@ const log_stdout = process.stdout;
 const util = require("util");
 const fetch = require("node-fetch");
 const cronJob = require("node-cron");
-const Activity = require("./model/activity");
 const {
   Scraper,
   Root,
@@ -28,6 +30,7 @@ const {
   OpenLinks,
   CollectContent,
 } = require("nodejs-web-scraper");
+const { default: puppeteer } = require("puppeteer");
 
 //app.use(express.static(path.join(__dirname, "../build")));
 
@@ -96,6 +99,79 @@ app.post("/article", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+// Fetch all badges from database
+app.get("/badges", cors(), async (req, res) => {
+  const badges = await Badge.find({});
+  // console.log("Badges from DB: ", badges);
+  res.send(badges);
+});
+
+// Scrape badge info from TryHackMe & Update database
+// app.get("/badges", async (req, res) => {
+//   const url = "https://tryhackme.com/p/fallabrine";
+
+//   async function getPage(url) {
+//     const browser = await puppeteer.launch({ headless: true });
+//     const page = await browser.newPage();
+//     await page.goto(url, { waitUntil: "networkidle0" });
+
+//     const html = await page.content();
+//     await browser.close();
+//     return html;
+//   }
+
+//   const html = await getPage(url);
+//   const $ = cheerio.load(html);
+//   const badges = await Badge.find({}, { _id: 0 });
+
+//   $(".badge-achieved").each((index, element) => {
+//     const badge = {
+//       name: $(".m-0.faded").eq(index).text(),
+//       description: $(".size-18.bold").eq(index).text(),
+//       img_icon_url: $(".badge-image").eq(index).attr("src"),
+//     };
+//     if (!badges.find((item) => item.name === badge.name)) {
+//       const newBadge = new Badge(badge);
+//       Badge.create(newBadge);
+//       console.log("New badge found: " + newBadge);
+//       // console.log();
+//     }
+//   });
+// });
+
+// Scrape TryHackMe & Update badge database every Sunday at Midnight
+const updateBadges = cronJob.schedule("0 0 * * 0", async () => {
+  const url = "https://tryhackme.com/p/fallabrine";
+
+  async function getPage(url) {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: "networkidle0" });
+
+    const html = await page.content();
+    await browser.close();
+    return html;
+  }
+
+  const html = await getPage(url);
+  const $ = cheerio.load(html);
+  const badges = await Badge.find({}, { _id: 0 });
+
+  $(".badge-achieved").each((index, element) => {
+    const badge = {
+      name: $(".m-0.faded").eq(index).text(),
+      description: $(".size-18.bold").eq(index).text(),
+      img_icon_url: $(".badge-image").eq(index).attr("src"),
+    };
+    if (!badges.find((item) => item.name === badge.name)) {
+      const newBadge = new Badge(badge);
+      Badge.create(newBadge);
+      console.log("New badge found: " + newBadge);
+      // console.log();
+    }
+  });
 });
 
 // Fetch all activities from database
@@ -182,10 +258,6 @@ app.get("/games", async (req, res) => {
       data.response.games.forEach((game) => {
         requestPromise(`https://store.steampowered.com/app/${game.appid}`).then(
           (html) => {
-            if (data.response.games.length <= 1) {
-              console.log("Data compiled");
-              res.send(finalData);
-            }
             let $ = cheerio.load(html);
             finalData.push({
               appid: game.appid,
@@ -195,12 +267,22 @@ app.get("/games", async (req, res) => {
             });
 
             data.response.games.shift();
+            if (data.response.games.length <= 0) {
+              console.log("Data compiled");
+              res.send(finalData);
+            }
           }
         );
       });
     });
 });
 
+// Uncomment for production
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+// Uncomment for development
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });

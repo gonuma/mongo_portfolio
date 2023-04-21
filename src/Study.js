@@ -4,10 +4,13 @@ import Accordion from "react-bootstrap/Accordion";
 import ListGroup from "react-bootstrap/ListGroup";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import { Card, Col, Row } from "react-bootstrap";
 
-export default function Notes() {
+export default function Study() {
   const [articles, setArticles] = useState([]);
   const [article, setArticle] = useState("");
+  const [badges, setBadges] = useState([]);
 
   const loadArticles = async () => {
     await fetch("//" + window.location.hostname + ":5000/articles")
@@ -19,15 +22,22 @@ export default function Notes() {
       });
   };
 
+  const loadBadges = async () => {
+    await fetch("//" + window.location.hostname + ":5000/badges")
+      .then((res) => res.json())
+      .then((data) => setBadges(data));
+  };
+
   useEffect(() => {
     loadArticles();
+    loadBadges();
   }, []);
 
   return (
     <Container>
       {/* <button onClick={() => console.log(articles)}>Articles</button> */}
       {/* <button onClick={() => console.log(categories)}>Categories</button> */}
-
+      <Button onClick={() => console.log(badges)}>Log Badges</Button>
       <Image
         fluid
         style={{
@@ -39,7 +49,6 @@ export default function Notes() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
       />
-
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Hardware</Accordion.Header>
@@ -170,14 +179,52 @@ export default function Notes() {
         </Accordion.Item>
       </Accordion>
       <p id="article"></p>
-      {/* <button
-        onClick={() => {
-          let target = document.getElementById("article");
-          return (target.innerText = article);
-        }}
-        >
-        test
-      </button> */}
+
+      {/* Badge Showcase */}
+      <Card className="text-center" style={{ backgroundColor: "#212529" }}>
+        <Card.Body>
+          <Card.Title style={{ color: "white" }}>TryHackMe Badges</Card.Title>
+          <Col
+            // xs={6}
+            className="d-flex"
+            // style={{ height: "15vh" }}
+          >
+            {badges.map((badge) => {
+              return (
+                <Container className="d-flex">
+                  <Row className="align-items-center">
+                    <Col>
+                      <Card
+                        style={{
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                          height: "35vh",
+                        }}
+                      >
+                        <Card.Body className="text-center">
+                          <Card.Title>{badge.name}</Card.Title>
+                          <Card.Text>{badge.description}</Card.Text>
+                          <Image
+                            fluid
+                            style={{
+                              marginTop: "2vh",
+                              marginBottom: "1vh",
+                              width: "30%",
+                              height: "auto",
+                            }}
+                            src={`https://tryhackme.com${badge.img_icon_url}`}
+                          />
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
+                </Container>
+                // < src={`https://tryhackme.com${badge.img_icon_url}`} />
+              );
+            })}
+          </Col>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }
