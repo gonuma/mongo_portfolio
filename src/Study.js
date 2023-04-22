@@ -38,7 +38,7 @@ export default function Study() {
       {/* <button onClick={() => console.log(articles)}>Articles</button> */}
       {/* <button onClick={() => console.log(categories)}>Categories</button> */}
       {/* <Button onClick={() => console.log(badges)}>Log Badges</Button> */}
-      <Image
+      {/* <Image
         fluid
         style={{
           maxHeight: "20vh",
@@ -48,7 +48,19 @@ export default function Study() {
           margin: "auto",
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
-      />
+      /> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "1vh",
+          marginBottom: "1vh",
+        }}
+      >
+        I'm working on a tool to allow me to write writeups and notes, but for
+        the meantime, enjoy a few badges I've earned during my studies.
+      </div>
       {/* <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Hardware</Accordion.Header>

@@ -11,9 +11,10 @@ const Header = () => {
         bg="dark"
         variant="dark"
         fixed="top"
+
         // style={{ paddingBottom: "2vh" }}
       >
-        <Container>
+        <Container fluid>
           <Navbar.Brand href="/">
             <img
               alt=""
@@ -33,21 +34,21 @@ const Header = () => {
             {/* <NavLink> */}
             {/* </NavLink> */}
             {/* <NavLink> */}
-            <Container style={{ textAlign: "right" }}>
+            <Container>
               <Navbar.Brand className="brand" href="/">
                 About Me
               </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
-            <Container style={{ textAlign: "right" }}>
+            <Container>
               <Navbar.Brand className="brand" href="/study">
                 Study
               </Navbar.Brand>
             </Container>
             {/* </NavLink> */}
             {/* <NavLink> */}
-            <Container style={{ textAlign: "right" }}>
+            <Container>
               <Navbar.Brand className="brand" href="/hobby">
                 Hobby
               </Navbar.Brand>

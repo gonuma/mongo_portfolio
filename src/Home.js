@@ -15,37 +15,55 @@ const Home = () => {
 
   return (
     <>
-      <Container fluid className="vh-100 d-flex flex-column text-center">
-        <Row fluid>
+      <Container
+        fluid
+        className="vh-100 d-flex flex-column text-center"
+        // style={{ justifyContent: "space-between" }}
+      >
+        {/* Top Row */}
+        <Row
+        // className="d-flex"
+        >
           <Col
+            className="m-auto align-self-center d-flex"
             xs={12}
-            md={6}
+            // xl={6}
             style={
               {
-                // backgroundColor: "lightblue"
+                // backgroundColor: "lightblue",
+                // height: "100%",
               }
             }
           >
             <Card
-              style={{
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
+              className="border-0 m-auto align-self-center"
+              style={
+                {
+                  // marginLeft: "auto",
+                  // marginRight: "auto",
+                }
+              }
             >
               <Card.Body>
                 <Card.Title
                   className="bg-dark text-white text-center"
-                  style={{ fontSize: "2rem" }}
+                  style={{ fontSize: "4rem" }}
                 >
                   Greg Edmondson
                 </Card.Title>
                 <Card.Subtitle
                   className="mb-3 text-muted text-center"
-                  style={{ fontSize: "1.5rem" }}
+                  style={{ fontSize: "3rem" }}
                 >
                   IT Professional
                 </Card.Subtitle>
-                <Card.Text className="" style={{ fontSize: "1.2rem" }}>
+                <Card.Text
+                  className=""
+                  style={{
+                    fontSize: "1.5rem",
+                    //  textAlign: "left"
+                  }}
+                >
                   📧 GregEdmondson95@gmail.com <br></br> 🏠 Chofu, Tokyo, Japan
                 </Card.Text>
               </Card.Body>
@@ -54,7 +72,7 @@ const Home = () => {
 
           <Col
             xs={12}
-            md={6}
+            // md={6}
             style={{
               backgroundColor: "#D3D3D3",
               // paddingBottom: "-5vh",
@@ -66,7 +84,7 @@ const Home = () => {
               style={{
                 marginTop: "2vh",
                 marginBottom: "1vh",
-                width: "30%",
+                maxWidth: "15%",
                 height: "auto",
               }}
               src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
@@ -91,18 +109,15 @@ const Home = () => {
             </Col>
           </Col>
         </Row>
-        {/* </Container>
-      <Container
-        fluid
-        className="vh-100 d-flex flex-column text-center"
-        style={{ backgroundColor: "lightblue" }}
-      > */}
-        <Row fluid style={{ height: "100%" }}>
+
+        {/* Bottom Row */}
+        <Row className="d-flex" style={{ maxHeight: "%" }}>
           <Col
-            xs={12}
-            md={6}
+            md={12}
+            lg={6}
             style={{
               backgroundColor: "#D3D3D3",
+              // height: "100%",
             }}
           >
             <Card
@@ -129,10 +144,63 @@ const Home = () => {
                   through Stripe. The frontend was built using Material UI.
                   Published new iterations and updates using Docker and GCP.
                 </Card.Text>
+                <Card.Title
+                  className="bg-dark text-white text-center"
+                  style={{ fontSize: "20px" }}
+                >
+                  Technologies Used
+                </Card.Title>
+                <Card.Text className="bg-light" style={{ fontSize: "16px" }}>
+                  <ul style={{ textAlign: "left" }}>
+                    <li>GCP</li>
+                    <li>MongoDB</li>
+                    <li>Express</li>
+                    <li>ReactJS</li>
+                  </ul>
+                </Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col
+            className="m-auto align-self-center"
+            md={12}
+            lg={6}
+            style={
+              {
+                // backgroundColor: "lightblue"
+              }
+            }
+          >
+            <Card
+              className="border-0"
+              style={
+                {
+                  // backgroundColor: "lightpink",
+                }
+              }
+            >
+              <Card.Body>
+                <Card.Title
+                  className="bg-dark text-white text-center"
+                  style={{ fontSize: "2rem" }}
+                >
+                  Demo
+                </Card.Title>
+                <Card.Text>
+                  <iframe
+                    width="100%"
+                    height="400vh"
+                    src="https://www.youtube.com/embed/O5HU8BrGvJQ"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          {/* <Col
             xs={12}
             md={6}
             style={
@@ -142,16 +210,15 @@ const Home = () => {
             }
           >
             <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/DLzxrzFCyOs"
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/O5HU8BrGvJQ"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen
-              style={{ paddingTop: "1vh" }}
             ></iframe>
-          </Col>
+          </Col> */}
         </Row>
         {/* <Row fluid style={{ position: "relative" }} className="h-50"></Row> */}
       </Container>

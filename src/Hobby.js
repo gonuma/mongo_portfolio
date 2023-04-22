@@ -95,7 +95,7 @@ export default function Hobby() {
   }, [activities]);
 
   return (
-    <Container>
+    <Container style={{ marginTop: "1vh" }}>
       <Tabs
         defaultActiveKey="cycling"
         id="uncontrolled-tab-example"
@@ -111,7 +111,9 @@ export default function Hobby() {
           >
             My sit-bones hurt. I try to make time whenever possible to go
             cycling, and am training for a 100km ride. (I've been saying this
-            for 2 years)
+            for 2 years). I've utilized the Strava API to keep track of my
+            rides, and to hold myself accountable. (PS: Feel free to follow me
+            on Strava, and we can go for a ride!)
           </div>
           <Card>
             <Card.Body>
@@ -216,8 +218,9 @@ export default function Hobby() {
               alignItems: "center",
             }}
           >
-            I play a lot of videogames. Here are some I've been playing over the
-            past couple of weeks...
+            I play a lot of videogames. I've implemented the Steam Web API and
+            web scraping to programatically fetch my most recently played games,
+            and a little supplemental info on them.
           </div>
           {/* <Button onClick={() => console.log(recentGames)}>Game List</Button> */}
           <Carousel>
