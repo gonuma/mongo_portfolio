@@ -34,14 +34,14 @@ const { default: puppeteer } = require("puppeteer");
 
 //app.use(express.static(path.join(__dirname, "../build")));
 
-// Import SSL certs
-let certs = {
-  key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
-  cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
-};
+// // Import SSL certs
+// let certs = {
+//   key: fs.readFileSync(path.join(__dirname, "../.keys/privkey.pem")),
+//   cert: fs.readFileSync(path.join(__dirname, "../.keys/fullchain.pem")),
+// };
 
-// Initialize HTTPS server
-let server = https.createServer(certs, app);
+// // Initialize HTTPS server
+// let server = https.createServer(certs, app);
 
 // CORS Settings
 const corsConfig = {
@@ -278,11 +278,11 @@ app.get("/games", async (req, res) => {
 });
 
 // Uncomment for production
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
-// Uncomment for development
-// app.listen(port, () => {
+// server.listen(port, () => {
 //   console.log(`Server is running on port ${port}`);
 // });
+
+// Uncomment for development
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});

@@ -62,32 +62,16 @@ const Music = () => {
   } else if (artists && artists.length > 0) {
     return (
       <Container>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <h1>Greg's Top Artists...</h1>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <p>
+        <Card className="border-0 text-center">
+          <Card.Title>Greg's Top Artists...</Card.Title>
+          <Card.Subtitle>
             I listen to a large variety of music, and I'm not too bad at
             karaoke.
-          </p>
-        </div>
+          </Card.Subtitle>
+        </Card>
         <Row>
           <Carousel>
             {artists.map((artist) => {
-              // console.log(artist.name);
-              // console.log(artist.images[2].url);
               return (
                 <Carousel.Item key={`${artist.name}`}>
                   <Col

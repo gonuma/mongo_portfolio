@@ -84,7 +84,8 @@ const Home = () => {
               style={{
                 marginTop: "2vh",
                 marginBottom: "1vh",
-                maxWidth: "15%",
+                // minWidth: "25%",
+                maxWidth: "18%",
                 height: "auto",
               }}
               src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"

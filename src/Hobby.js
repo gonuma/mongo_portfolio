@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import Music from "./Music.js";
-import { CarouselItem } from "react-bootstrap";
+import { CarouselItem, Nav } from "react-bootstrap";
 
 export default function Hobby() {
   const [activities, setActivities] = useState([]);
@@ -102,19 +102,18 @@ export default function Hobby() {
         className="mb-3"
       >
         <Tab eventKey="cycling" title="Cycling">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            My sit-bones hurt. I try to make time whenever possible to go
-            cycling, and am training for a 100km ride. (I've been saying this
-            for 2 years). I've utilized the Strava API to keep track of my
-            rides, and to hold myself accountable. (PS: Feel free to follow me
-            on Strava, and we can go for a ride!)
-          </div>
+          <Card className="border-0">
+            <Card.Subtitle>
+              My sit-bones hurt. I try to make time whenever possible to go
+              cycling, and am training for a 100km ride. &#40;I've been saying
+              this for 2 years&#41;. I've utilized the Strava API to keep track
+              of my rides, and to hold myself accountable. Feel free to{" "}
+              <a href="https://www.strava.com/athletes/8782215">
+                follow me on Strava
+              </a>
+              , and we can go for a ride!
+            </Card.Subtitle>
+          </Card>
           <Card>
             <Card.Body>
               <Card.Title>
@@ -147,15 +146,11 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="running" title="Running">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            I hate running, but I do it enough to warrant putting it here.
-          </div>
+          <Card className="border-0">
+            <Card.Subtitle>
+              I hate running, but I do it enough to warrant putting it here.
+            </Card.Subtitle>
+          </Card>
           <Card>
             <Card.Body>
               <Card.Title>
@@ -188,15 +183,9 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="lifting" title="Weight Lifting">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            I'm working on gettin' swole.
-          </div>
+          <Card className="border-0">
+            <Card.Subtitle>I'm working on gettin' swole.</Card.Subtitle>
+          </Card>
           <Card>
             <Card.Body>
               <Card.Title>{sessions} sessions</Card.Title>
@@ -211,18 +200,13 @@ export default function Hobby() {
           <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            I play a lot of videogames. I've implemented the Steam Web API and
-            web scraping to programatically fetch my most recently played games,
-            and a little supplemental info on them.
-          </div>
-          {/* <Button onClick={() => console.log(recentGames)}>Game List</Button> */}
+          <Card className="border-0">
+            <Card.Subtitle>
+              I play a lot of videogames. I've implemented the Steam Web API and
+              web scraping to programatically fetch my most recently played
+              games, and a little supplemental info on them.
+            </Card.Subtitle>
+          </Card>
           <Carousel>
             {recentGames.map((game, index) => {
               return (
