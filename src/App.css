@@ -38,6 +38,15 @@ body {
   font-size: 2rem !important;
 }
 
+.tab-active {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.tab-hover:hover {
+  background-color: #555; /* Another slightly lighter shade when hovered */
+}
+
 @media screen and (max-width: 450px) {
   .brand {
     font-size: 1rem !important;

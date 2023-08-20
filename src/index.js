@@ -6,11 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.js";
 
 import Header from "./Header";
-import Home from "./Home";
+import Home from "./pages/Home";
 import Music from "./Music";
-import Test from "./Test";
+import Test from "./pages/Test";
 import Study from "./Study";
-import Hobby from "./Hobby";
+import Hobby from "./pages/Hobby";
 import Article from "./pages/Article";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

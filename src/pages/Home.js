@@ -13,19 +13,18 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-    <Card className="mt-4">
-      <Card.Header className="bg-dark text-white">Certifications</Card.Header>
-      <Card.Body>
-        <ol>
-          <li>Cisco CCNA</li>
-          <li>Japanese Language Proficiency Exam Level 1</li>
-          {/* Add more certifications as needed */}
-        </ol>
-      </Card.Body>
-    </Card>;
-  };
+  // const handleSelect = (selectedIndex, e) => {
+  //   setIndex(selectedIndex);
+  //   <Card className="mt-4">
+  //     <Card.Header className="bg-dark text-white">Certifications</Card.Header>
+  //     <Card.Body>
+  //       <ol>
+  //         <li>Cisco CCNA</li>
+  //         <li>JLPT N1</li>
+  //       </ol>
+  //     </Card.Body>
+  //   </Card>;
+  // };
 
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -40,40 +39,20 @@ const Home = () => {
     bottom: "5%",
     zIndex: 1050,
     overflowY: "auto",
+    maxHeight: "calc(100vh - 210px)", // Adjust this as needed
+    padding: "20px",
   };
 
   return (
     <>
-      <Container
-        fluid
-        className="vh-100 d-flex flex-column text-center"
-        // style={{ justifyContent: "space-between" }}
-      >
+      <Container fluid className="vh-100 d-flex flex-column text-center">
         {/* Top Row */}
         <Row className="mt-3">
-          <Col
-            className="m-auto align-self-center d-flex"
-            xs={12}
-            // xl={6}
-            style={
-              {
-                // backgroundColor: "lightblue",
-                // height: "100%",
-              }
-            }
-          >
-            <Card
-              className="border-0 m-auto align-self-center"
-              style={
-                {
-                  // marginLeft: "auto",
-                  // marginRight: "auto",
-                }
-              }
-            >
+          <Col className="m-auto align-self-center d-flex" xs={12}>
+            <Card className="border-0 m-auto align-self-center">
               <Card.Body>
                 <Card.Title
-                  className="bg-dark text-white text-center pb-3"
+                  className="bg-dark text-white text-center p-1"
                   style={{ fontSize: "3rem" }}
                 >
                   Greg Edmondson
@@ -88,7 +67,6 @@ const Home = () => {
                   className=""
                   style={{
                     fontSize: "1.5rem",
-                    //  textAlign: "left"
                   }}
                 >
                   📧 GregEdmondson95@gmail.com <br></br> 🏠 Chofu, Tokyo, Japan
@@ -99,10 +77,8 @@ const Home = () => {
 
           <Col
             xs={12}
-            // md={6}
             style={{
               backgroundColor: "#D3D3D3",
-              // paddingBottom: "-5vh",
             }}
           >
             <Image
@@ -112,6 +88,7 @@ const Home = () => {
                 marginTop: "2vh",
                 marginBottom: "1vh",
                 maxWidth: "15%",
+                minWidth: "150px",
                 height: "auto",
               }}
               src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/cowboy.JPG"
@@ -127,7 +104,6 @@ const Home = () => {
                 marginRight: "2vw",
                 paddingLeft: "2vw",
                 paddingRight: "2vw",
-                // paddingBottom: "2vh",
                 marginBottom: "2vh",
               }}
             >
@@ -139,15 +115,7 @@ const Home = () => {
 
         {/* Bottom Row */}
         <Row className="d-flex" style={{ maxHeight: "%" }}>
-          <Card
-            className="border-0 m-auto align-self-center"
-            style={
-              {
-                // marginLeft: "auto",
-                // marginRight: "auto",
-              }
-            }
-          >
+          <Card className="border-0 m-auto align-self-center">
             <Card.Body>
               <Card.Title
                 className="bg-dark text-white text-center"
@@ -178,15 +146,17 @@ const Home = () => {
             </Card.Body>
           </Card>
 
-          <Card className="mt-4">
-            <Card.Header className="bg-dark text-white">
-              Certifications
-            </Card.Header>
+          <Card className="border-0 m-auto align-self-center">
             <Card.Body>
+              <Card.Title
+                className="bg-dark text-white text-center"
+                style={{ fontSize: "3rem" }}
+              >
+                Certifications
+              </Card.Title>
               <ol style={{ textAlign: "left" }}>
                 <li>Cisco CCNA</li>
-                <li>Japanese Language Proficiency Exam Level 1</li>
-                {/* Add more certifications as needed */}
+                <li>JLPT N1</li>
               </ol>
             </Card.Body>
           </Card>
@@ -204,13 +174,7 @@ const Home = () => {
             </Modal.Header>
             <Modal.Body>
               {selectedItem === "Senpai" ? (
-                <Col
-                  md={12}
-                  style={{
-                    backgroundColor: "#D3D3D3",
-                    // height: "100%",
-                  }}
-                >
+                <Col md={12}>
                   <Card
                     className="border-0"
                     style={{
@@ -259,14 +223,7 @@ const Home = () => {
                     </Card.Body>
                   </Card>
 
-                  <Card
-                    className="border-0"
-                    style={
-                      {
-                        // backgroundColor: "lightpink",
-                      }
-                    }
-                  >
+                  <Card className="border-0">
                     <Card.Body>
                       <Card.Title
                         className="bg-dark text-white text-center"
@@ -293,13 +250,7 @@ const Home = () => {
                 ""
               )}
               {selectedItem === "Collabspace" ? (
-                <Col
-                  md={12}
-                  style={{
-                    backgroundColor: "#D3D3D3",
-                    // height: "100%",
-                  }}
-                >
+                <Col md={12}>
                   <Card
                     className="border-0"
                     style={{
@@ -347,14 +298,7 @@ const Home = () => {
                       </Card.Text>
                     </Card.Body>
                   </Card>
-                  <Card
-                    className="border-0"
-                    style={
-                      {
-                        // backgroundColor: "lightpink",
-                      }
-                    }
-                  >
+                  <Card className="border-0">
                     <Card.Body>
                       <Card.Title
                         className="bg-dark text-white text-center"
@@ -366,7 +310,7 @@ const Home = () => {
                         <iframe
                           width="100%"
                           height="400vh"
-                          src="https://www.youtube.com/embed/O5HU8BrGvJQ"
+                          src="https://www.youtube.com/embed/-4O2LioAjK8"
                           title="YouTube video player"
                           frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -381,13 +325,7 @@ const Home = () => {
                 ""
               )}
               {selectedItem === "MusiSpace" ? (
-                <Col
-                  md={12}
-                  style={{
-                    backgroundColor: "#D3D3D3",
-                    // height: "100%",
-                  }}
-                >
+                <Col md={12}>
                   <Card
                     className="border-0"
                     style={{

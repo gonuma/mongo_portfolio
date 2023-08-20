@@ -8,10 +8,11 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Music from "./Music.js";
+import Music from "../src/components/Music.js";
 import { CarouselItem } from "react-bootstrap";
 
 export default function Hobby() {
+  // const [refreshToken, setRefreshToken] = useState("");
   const [activities, setActivities] = useState([]);
   const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
   const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
@@ -20,11 +21,19 @@ export default function Hobby() {
   const [sessions, setSessions] = useState(0);
   const [recentGames, setRecentGames] = useState([]);
 
+  // Load Refresh Token
+  // const getRefreshToken = async () => {
+  //   const response = await axios.get(
+  //     "//" + window.location.hostname + ":5000/strava-refresh"
+  //   );
+  //   setRefreshToken(response.data.access_token);
+  // };
+
   const loadGames = async () => {
     await fetch("//" + window.location.hostname + ":5000/games")
       .then((res) => res.json())
       .then((data) => {
-        setRecentGames(data);
+        setRecentGames(data.games);
       });
   };
 
@@ -95,141 +104,146 @@ export default function Hobby() {
   }, [activities]);
 
   return (
-    <Container
-      fluid
-      className="d-flex flex-column py-3"
-      style={{
-        backgroundColor: "#2C2C2C",
-        marginTop: "1vh",
-        minHeight: "100vh", // This ensures the container takes up at least the full height of the viewport
-      }}
-    >
+    <Container>
       <Tabs
         defaultActiveKey="cycling"
         id="uncontrolled-tab-example"
-        className="mb-3 text-white"
+        className="mb-3"
       >
         <Tab eventKey="cycling" title="Cycling">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            My sit-bones hurt. I try to make time whenever possible to go
-            cycling, and am training for a 100km ride. (I've been saying this
-            for 2 years). I've utilized the Strava API to keep track of my
-            rides, and to hold myself accountable. (PS: Feel free to follow me
-            on Strava, and we can go for a ride!)
-          </div>
-          <Card>
+          <Card className="border-0">
             <Card.Body>
               <Card.Title>
-                Lifetime Distance: {Math.ceil(totalDistanceCycling)} km
-                <ProgressBar
-                  now={Math.ceil(totalDistanceCycling)}
-                  max={382500}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  My sit-bones hurt. I try to make time whenever possible to go
+                  cycling, and am training for a 100km ride. (I've been saying
+                  this for 2 years)
+                </div>
               </Card.Title>
               <Card.Text>
-                {((totalDistanceCycling / 382500) * 100).toFixed(6)}% of the way
-                to the moon
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                2023 Distance: {Math.ceil(yearlyDistanceCycling)} km
-                <ProgressBar
-                  now={Math.ceil(yearlyDistanceCycling)}
-                  max={1000}
-                />
-              </Card.Title>
-              <Card.Text>
-                {((yearlyDistanceCycling / 1000) * 100).toFixed(1)}% of yearly
-                goal (1000 km)
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      Lifetime Distance: {Math.ceil(totalDistanceCycling)} km
+                      <ProgressBar
+                        now={Math.ceil(totalDistanceCycling)}
+                        max={382500}
+                      />
+                    </Card.Title>
+                    <Card.Text>
+                      {((totalDistanceCycling / 382500) * 100).toFixed(6)}% of
+                      the way to the moon
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      2023 Distance: {Math.ceil(yearlyDistanceCycling)} km
+                      <ProgressBar
+                        now={Math.ceil(yearlyDistanceCycling)}
+                        max={1000}
+                      />
+                    </Card.Title>
+                    <Card.Text>
+                      {((yearlyDistanceCycling / 1000) * 100).toFixed(1)}% of
+                      yearly goal (1000 km)
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               </Card.Text>
             </Card.Body>
           </Card>
         </Tab>
+
         <Tab eventKey="running" title="Running">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            I hate running, but I do it enough to warrant putting it here.
-          </div>
-          <Card>
+          <Card className="border-0">
             <Card.Body>
-              <Card.Title>
-                Lifetime Distance: {Math.ceil(totalDistanceRunning)} km
-                <ProgressBar
-                  now={Math.ceil(totalDistanceRunning)}
-                  max={382500}
-                />
+              <Card.Title className="center-text">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  I hate running, but I do it enough to warrant putting it here.
+                </div>
               </Card.Title>
               <Card.Text>
-                {((totalDistanceRunning / 382500) * 100).toFixed(6)}% of the way
-                to the moon
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                2023 Distance: {Math.ceil(yearlyDistanceRunning)} km
-                <ProgressBar
-                  now={Math.ceil(yearlyDistanceRunning)}
-                  max={1000}
-                />
-              </Card.Title>
-              <Card.Text>
-                {((yearlyDistanceRunning / 300) * 100).toFixed(1)}% of yearly
-                goal (300 km)
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      Lifetime Distance: {Math.ceil(totalDistanceRunning)} km
+                      <ProgressBar
+                        now={Math.ceil(totalDistanceRunning)}
+                        max={382500}
+                      />
+                    </Card.Title>
+                    <Card.Text>
+                      {((totalDistanceRunning / 382500) * 100).toFixed(6)}% of
+                      the way to the moon
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+
+                <Card>
+                  <Card.Body>
+                    <Card.Title>
+                      2023 Distance: {Math.ceil(yearlyDistanceRunning)} km
+                      <ProgressBar
+                        now={Math.ceil(yearlyDistanceRunning)}
+                        max={1000}
+                      />
+                    </Card.Title>
+                    <Card.Text>
+                      {((yearlyDistanceRunning / 300) * 100).toFixed(1)}% of
+                      yearly goal (300 km)
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               </Card.Text>
             </Card.Body>
           </Card>
         </Tab>
+
         <Tab eventKey="lifting" title="Weight Lifting">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            I'm working on gettin' swole.
-          </div>
-          <Card>
+          <Card className="border-0">
             <Card.Body>
-              <Card.Title>{sessions} sessions</Card.Title>
+              <Card.Title>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  I'm working on gettin' swole.
+                </div>
+              </Card.Title>
               <Card.Text>
-                What else do I even put here? Maybe I can put total amount of
-                squats or something...
+                <Card>
+                  <Card.Body>
+                    <Card.Title>{sessions} sessions</Card.Title>
+                    <Card.Text>
+                      What else do I even put here? Maybe I can put total amount
+                      of squats or something...
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               </Card.Text>
             </Card.Body>
           </Card>
         </Tab>
+
         <Tab eventKey="music" title="Music">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            I listen to a large variety of music, and I'm not too bad at
-            karaoke.
-          </div>
           <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
@@ -238,27 +252,25 @@ export default function Hobby() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              color: "white",
             }}
           >
-            I play a lot of videogames. I've implemented the Steam Web API and
-            web scraping to programatically fetch my most recently played games,
-            and a little supplemental info on them.
+            I play a lot of videogames. Here are some I've been playing over the
+            past couple of weeks...
           </div>
-          {/* <Button onClick={() => console.log(recentGames)}>Game List</Button> */}
           <Carousel>
             {recentGames.map((game, index) => {
               return (
                 <CarouselItem key={`${game.name}`}>
                   <Card className="align-items-center border-0">
                     <Card.Body>
-                      <Card.Title className="text-center">
+                      <Card.Title>
                         {game.name}
                         <Card.Img
+                          // style={{ height: "45vh", width: "auto" }}
                           src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
                         />
+                        {/* <Button onClick={() => console.log(game)}>Test</Button> */}
                       </Card.Title>
-                      <Card.Text>{game.description}</Card.Text>
                     </Card.Body>
                   </Card>
                 </CarouselItem>
