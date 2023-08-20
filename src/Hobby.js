@@ -95,11 +95,19 @@ export default function Hobby() {
   }, [activities]);
 
   return (
-    <Container style={{ marginTop: "1vh" }}>
+    <Container
+      fluid
+      className="d-flex flex-column py-3"
+      style={{
+        backgroundColor: "#2C2C2C",
+        marginTop: "1vh",
+        minHeight: "100vh", // This ensures the container takes up at least the full height of the viewport
+      }}
+    >
       <Tabs
         defaultActiveKey="cycling"
         id="uncontrolled-tab-example"
-        className="mb-3"
+        className="mb-3 text-white"
       >
         <Tab eventKey="cycling" title="Cycling">
           <div
@@ -107,6 +115,7 @@ export default function Hobby() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             My sit-bones hurt. I try to make time whenever possible to go
@@ -152,6 +161,7 @@ export default function Hobby() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             I hate running, but I do it enough to warrant putting it here.
@@ -193,6 +203,7 @@ export default function Hobby() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             I'm working on gettin' swole.
@@ -208,6 +219,17 @@ export default function Hobby() {
           </Card>
         </Tab>
         <Tab eventKey="music" title="Music">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+            }}
+          >
+            I listen to a large variety of music, and I'm not too bad at
+            karaoke.
+          </div>
           <Music />
         </Tab>
         <Tab eventKey="gaming" title="Gaming">
@@ -216,6 +238,7 @@ export default function Hobby() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             I play a lot of videogames. I've implemented the Steam Web API and

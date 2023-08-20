@@ -1,0 +1,15 @@
+/* Header.css */
+
+.sticky-header {
+    background-color: #343a40; /* Default bg-dark color from Bootstrap */
+}
+
+.nav-item-custom {
+    font-size: 1.4rem;
+}
+
+.nav-item-custom:hover {
+    background-color: #D3D3D3; /* Light grey background on hover, similar to previous component's background */
+    border-radius: 5px;        /* Smoothens the corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}

@@ -62,7 +62,7 @@ const Music = () => {
   } else if (artists && artists.length > 0) {
     return (
       <Container>
-        <div
+        {/* <div
           style={{
             display: "flex",
             justifyContent: "center",
@@ -82,7 +82,7 @@ const Music = () => {
             I listen to a large variety of music, and I'm not too bad at
             karaoke.
           </p>
-        </div>
+        </div> */}
         <Row>
           <Carousel>
             {artists.map((artist) => {

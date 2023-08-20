@@ -34,7 +34,14 @@ export default function Study() {
   }, []);
 
   return (
-    <Container>
+    <Container
+      fluid
+      className="d-flex flex-column py-3"
+      style={{
+        backgroundColor: "#2C2C2C",
+        minHeight: "100vh",
+      }}
+    >
       {/* <button onClick={() => console.log(articles)}>Articles</button> */}
       {/* <button onClick={() => console.log(categories)}>Categories</button> */}
       {/* <Button onClick={() => console.log(badges)}>Log Badges</Button> */}
@@ -49,18 +56,11 @@ export default function Study() {
         }}
         src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
       /> */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "1vh",
-          marginBottom: "1vh",
-        }}
-      >
+      <div className="d-flex justify-content-center align-items-center my-3 text-light">
         I'm working on a tool to allow me to write writeups and notes, but for
         the meantime, enjoy a few badges I've earned during my studies.
       </div>
+
       {/* <Accordion alwaysOpen>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Hardware</Accordion.Header>
