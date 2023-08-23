@@ -129,7 +129,7 @@ export default function Hobby() {
             <Image
               src="https://via.placeholder.com/500x300.png?text=Road+Cyclist"
               alt="Placeholder Road Cyclist"
-              style={{ width: "80%", marginBottom: "20px" }}
+              style={{ width: "40%", marginBottom: "20px" }}
             />
             My sit-bones hurt. I try to make time whenever possible to go
             cycling, and am training for a 100km ride. (I've been saying this
@@ -186,7 +186,7 @@ export default function Hobby() {
             <Image
               src="https://via.placeholder.com/500x300.png?text=Runner"
               alt="Placeholder Road Cyclist"
-              style={{ width: "80%", marginBottom: "20px" }}
+              style={{ width: "40%", marginBottom: "20px" }}
             />
           </div>
           <Card className="mb-3">
@@ -237,7 +237,7 @@ export default function Hobby() {
             <Image
               src="https://via.placeholder.com/500x300.png?text=Weightlifting"
               alt="Placeholder Road Cyclist"
-              style={{ width: "80%", marginBottom: "20px" }}
+              style={{ width: "40%", marginBottom: "20px" }}
             />
             I'm working on gettin' swole.
           </div>
