@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Music from "../Music.js";
+import Music from "../components/Music.js";
 import { CarouselItem } from "react-bootstrap";
 import "../App.css";
 

@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App.js";
 
-import Header from "./Header";
+import Header from "./components/Header";
 import Home from "./pages/Home";
-import Music from "./Music";
+import Music from "./components/Music";
 import Test from "./pages/Test";
 import Study from "./Study";
 import Hobby from "./pages/Hobby";
