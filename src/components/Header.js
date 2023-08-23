@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "./no-back-logo.svg";
+import logo from "../no-back-logo.svg";
+import "../Header.css"; // Assuming you will create a Header.css file for the styling
 import { Navbar, Nav } from "react-bootstrap";
-import "./Header.css"; // Assuming you will create a Header.css file for the styling
 
 const Header = () => {
   return (
@@ -35,9 +35,9 @@ const Header = () => {
             <Nav.Link href="/hobby" className="text-light mx-3 nav-item-custom">
               Hobby
             </Nav.Link>
-            <Nav.Link href="/test" className="text-light mx-3 nav-item-custom">
+            {/* <Nav.Link href="/test" className="text-light mx-3 nav-item-custom">
               Test
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
