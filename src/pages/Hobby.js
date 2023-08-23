@@ -295,10 +295,17 @@ export default function Hobby() {
                     <Card.Body>
                       <Card.Title className="text-center">
                         {game.name}
-                        <Card.Img
-                          src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
-                        />
                       </Card.Title>
+                      <Card.Img
+                        src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
+                        style={{
+                          width: "50%",
+                          height: "auto",
+                          display: "block",
+                          marginLeft: "auto",
+                          marginRight: "auto",
+                        }}
+                      />
                       <Card.Text>{game.description}</Card.Text>
                     </Card.Body>
                   </Card>

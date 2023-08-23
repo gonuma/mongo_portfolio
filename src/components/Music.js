@@ -67,6 +67,7 @@ const Music = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            color: "white",
           }}
         >
           <h1>Greg's Top Artists...</h1>
@@ -76,6 +77,7 @@ const Music = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            color: "white",
           }}
         >
           <p>
