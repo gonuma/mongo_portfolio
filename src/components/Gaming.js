@@ -17,13 +17,8 @@ const Gaming = () => {
   }, []);
 
   return (
-    <>
-      <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
-        I like videogames. I've implemented the Steam Web API and web scraping
-        to programmatically fetch my most recently played games and a little
-        supplemental info on them.
-      </div>
-
+    <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
+      <h1 className="text-center py-3">My Recent Games</h1>
       <Carousel indicators={false}>
         {recentGames.map((game) => (
           <Carousel.Item key={game.name}>
@@ -46,7 +41,7 @@ const Gaming = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-    </>
+    </div>
   );
 };
 
