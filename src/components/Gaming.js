@@ -31,13 +31,22 @@ const Gaming = () => {
         little supplemental info on them.
       </div>
 
-      <Carousel>
+      <Carousel indicators={false}>
         {recentGames.map((game, index) => {
           return (
             <Carousel.Item key={`${game.name}`}>
               <Card className="align-items-center border-0">
                 <Card.Body>
-                  <Card.Title className="text-center">{game.name}</Card.Title>
+                  <Card.Title
+                    className="text-center"
+                    style={{
+                      backgroundColor: "#d3d3d3",
+                      color: "white",
+                      padding: "10px",
+                    }}
+                  >
+                    {game.name}
+                  </Card.Title>
                   <Card.Img
                     src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
                     style={{
@@ -48,7 +57,15 @@ const Gaming = () => {
                       marginRight: "auto",
                     }}
                   />
-                  <Card.Text>{game.description}</Card.Text>
+                  <Card.Text
+                    style={{
+                      backgroundColor: "#d3d3d3",
+                      color: "white",
+                      padding: "10px",
+                    }}
+                  >
+                    {game.description}
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Carousel.Item>
