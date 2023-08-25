@@ -19,6 +19,25 @@ body {
   }
 }
 
+.carousel-image {
+  max-width: 50%; /* Adjusts the maximum width of the image */
+  height: auto; /* Makes the image responsive vertically */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .carousel-image {
+    max-width: 70%;
+  }
+}
+
+/* Media query for even smaller screens */
+@media (max-width: 576px) {
+  .carousel-image {
+    max-width: 90%;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

@@ -107,6 +107,7 @@ const Music = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          color: "white",
         }}
       >
         <h1>Loading...</h1>
@@ -183,7 +184,8 @@ const Music = () => {
             </Row>
           </Modal.Body>
         </Modal>
-        <Row>
+
+        <Row className="mt-3">
           <div
             style={{
               display: "flex",
@@ -192,7 +194,7 @@ const Music = () => {
               color: "white",
             }}
           >
-            <h1>Greg's Top Artists...</h1>
+            <h1>Greg's Top Recent Artists on Spotify...</h1>
           </div>
           <Carousel>
             {artists.map((artist) => {
@@ -200,28 +202,14 @@ const Music = () => {
               // console.log(artist.images[2].url);
               return (
                 <Carousel.Item key={`${artist.name}`}>
-                  <Col
-                    fluid
-                    className="align-items-center"
-                    style={{
-                      maxHeight: "65vh",
-                      maxWidth: "100vw",
-                      padding: "1vh",
-                      display: "block",
-                      margin: "auto",
-                    }}
-                  >
+                  <div className="d-flex justify-content-center">
                     <Image
-                      style={{
-                        display: "flex",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        height: "65vh",
-                      }}
+                      className="carousel-image"
                       src={artist.images[0].url}
+                      alt={artist.name}
                     />
-                    <Carousel.Caption>{artist.name}</Carousel.Caption>
-                  </Col>
+                  </div>
+                  <Carousel.Caption>{artist.name}</Carousel.Caption>
                 </Carousel.Item>
               );
             })}
