@@ -13,6 +13,39 @@ export default function Study() {
   const [article, setArticle] = useState("");
   const [badges, setBadges] = useState([]);
 
+  const dummyBadges = [
+    {
+      name: "Advent of Cyber 4",
+      description: "Description for Badge One",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+    {
+      name: "Pentesting Principles",
+      description: "Description for Badge Two",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+    {
+      name: "Intro to Offensive Security",
+      description: "Description for Badge Two",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+    {
+      name: "Advent of Cyber 4",
+      description: "Description for Badge One",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+    {
+      name: "Pentesting Principles",
+      description: "Description for Badge Two",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+    {
+      name: "Intro to Offensive Security",
+      description: "Description for Badge Two",
+      img_icon_url: "/img/badges/introtooffensivesecurity.svg",
+    },
+  ];
+
   const loadArticles = async () => {
     await fetch("//" + window.location.hostname + ":5000/articles")
       // const response = await axios
@@ -24,9 +57,22 @@ export default function Study() {
   };
 
   const loadBadges = async () => {
-    await fetch("//" + window.location.hostname + ":5000/badges")
-      .then((res) => res.json())
-      .then((data) => setBadges(data));
+    try {
+      const response = await fetch(
+        "//" + window.location.hostname + ":5000/badges"
+      );
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        setBadges(data);
+      } else {
+        console.warn("No data received. Using dummy badges.");
+        setBadges(dummyBadges);
+      }
+    } catch (error) {
+      console.error("Failed to fetch badges. Using dummy data.", error);
+      setBadges(dummyBadges);
+    }
   };
 
   useEffect(() => {
@@ -200,25 +246,37 @@ export default function Study() {
       >
         <Card.Body>
           <Card.Title style={{ color: "white" }}>TryHackMe Badges</Card.Title>
-          <Carousel>
-            {/* <Container className="" style={{ width: "50%" }}> */}
+          <Row>
+            {badges.map((badge) => {
+              return (
+                <Col md={4} key={badge.name} className="mb-4">
+                  <Card>
+                    <Card.Body className="text-center">
+                      <Card.Title>{badge.name}</Card.Title>
+                      <Card.Text>{badge.description}</Card.Text>
+                      <Image
+                        fluid
+                        className="badge-image"
+                        style={{
+                          marginTop: "2vh",
+                          marginBottom: "1vh",
+                          width: "40%",
+                          height: "auto",
+                        }}
+                        src={`https://tryhackme.com${badge.img_icon_url}`}
+                      />
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+          {/* <Carousel>
             {badges.map((badge, index) => {
               return (
                 <Carousel.Item key={`${badge.name}`}>
                   <Col className="align-items-center">
-                    {/* <Col xs={12}>
-                      <Button onClick={() => console.log(index)}>
-                      Index Test
-                    </Button> */}
-                    <Card
-                      style={
-                        {
-                          // marginLeft: "auto",
-                          // marginRight: "auto",
-                          // height: "35vh",
-                        }
-                      }
-                    >
+                    <Card>
                       <Card.Body className="text-center">
                         <Card.Title>{badge.name}</Card.Title>
                         <Card.Text>{badge.description}</Card.Text>
@@ -235,13 +293,11 @@ export default function Study() {
                         />
                       </Card.Body>
                     </Card>
-                    {/* </Col> */}
                   </Col>
                 </Carousel.Item>
               );
             })}
-          </Carousel>
-          {/* </Container> */}
+          </Carousel> */}
         </Card.Body>
       </Card>
     </Container>
