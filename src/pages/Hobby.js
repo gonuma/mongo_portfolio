@@ -59,7 +59,6 @@ export default function Hobby() {
       { title: "Ocean Avenue", videoId: "X9fLbfzCqWw" },
       { title: "Viva La Vida", videoId: "dvgZkm1xWPE" },
       { title: "Feel Good Inc.", videoId: "HyHNuVaZJ-k" },
-      { title: "Ocean", videoId: "X9fLbfzCqWw" },
     ],
   };
 
@@ -311,6 +310,19 @@ export default function Hobby() {
         >
           <Music />
           <Row className="justify-content-md-center mt-3">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+                flexDirection: "column",
+                padding: "1vh",
+              }}
+            >
+              Click the buttons below to check out some of my favorite songs
+              from each decade!
+            </div>
             {Object.keys(DECADE_SONGS).map((decade) => (
               <Col xs="auto" key={decade}>
                 <Button
@@ -349,7 +361,7 @@ export default function Hobby() {
                   </ListGroup>
                 </Col>
                 <Col md={6}>
-                  {currentVideoId && ( // Only show iframe if there's a video ID selected
+                  {currentVideoId && (
                     <iframe
                       width="100%"
                       height="315"
