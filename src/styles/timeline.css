@@ -1,0 +1,71 @@
+.timeline {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* top: 20%; */
+  height: 3px;
+  background: #ddd;
+  clear: both;
+  z-index: 0;
+}
+
+.timeline-item {
+  position: relative;
+  width: calc(100% / 5); /* Assuming 5 items for now */
+  float: left;
+  text-align: center;
+  padding: 10px;
+}
+
+.timeline-item::before {
+  display: none;
+}
+
+.timeline-item:hover::before {
+  background: #007bff; /* Bootstrap primary color */
+}
+
+.timeline-item .timeline-header {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.timeline-item:hover .timeline-header {
+  color: #007bff; /* Bootstrap primary color */
+}
+
+.timeline-container {
+  position: relative;
+  padding-top: 10px; /* Reserve space for the description */
+  padding-bottom: 15px;
+}
+
+.timeline-description {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: #d3d3d3;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.timeline-item:hover .timeline-description,
+.timeline-item.active .timeline-description {
+  display: block;
+}
+
+/* Icon for interactivity */
+.interactive-icon {
+  display: inline-block;
+  margin-left: 5px;
+  transform: translateY(-2px); /* Adjust based on the icon's size */
+}

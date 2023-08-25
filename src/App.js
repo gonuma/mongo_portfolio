@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "./no-back-logo.svg";
-import "./App.css";
+import "./styles/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {

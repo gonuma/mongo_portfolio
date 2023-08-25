@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Accordion from "react-bootstrap/Accordion";
-import ListGroup from "react-bootstrap/ListGroup";
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
+import { Accordion, ListGroup, Image, Container } from "react-bootstrap";
 
 export default function Notes() {
   const [articles, setArticles] = useState([]);

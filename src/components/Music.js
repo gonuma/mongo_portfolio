@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
 import axios from "axios";
-import Card from "react-bootstrap/Card";
+import { Image, Container, Row, Col, Carousel, Card } from "react-bootstrap";
 
 const Music = () => {
   const [artists, setArtists] = useState([]);

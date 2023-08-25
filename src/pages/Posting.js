@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
+import {
+  InputGroup,
+  Form,
+  Dropdown,
+  DropdownButton,
+  Button,
+} from "react-bootstrap";
 
 export default function Posting() {
   const [verification, setVerification] = useState("unverified");

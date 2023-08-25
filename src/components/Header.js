@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../no-back-logo.svg";
-import "../Header.css"; // Assuming you will create a Header.css file for the styling
+import "../styles/Header.css";
 import { Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {

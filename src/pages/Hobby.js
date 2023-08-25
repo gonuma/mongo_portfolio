@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import Carousel from "react-bootstrap/Carousel";
-import ProgressBar from "react-bootstrap/ProgressBar";
+import {
+  Image,
+  Container,
+  Tab,
+  Tabs,
+  Button,
+  Card,
+  Row,
+  Col,
+  Carousel,
+  CarouselItem,
+  ProgressBar,
+  Modal,
+  ListGroup,
+} from "react-bootstrap";
 import Music from "../components/Music.js";
-import { CarouselItem } from "react-bootstrap";
-import "../App.css";
+import "../styles/App.css";
 
 export default function Hobby() {
   const [activities, setActivities] = useState([]);
@@ -20,7 +26,54 @@ export default function Hobby() {
   const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
   const [sessions, setSessions] = useState(0);
   const [recentGames, setRecentGames] = useState([]);
-  const [activeTab, setActiveTab] = useState("cycling"); // initial active tab
+  const [activeTab, setActiveTab] = useState("cycling");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDecade, setSelectedDecade] = useState("");
+  const [songs, setSongs] = useState([]);
+  const [currentVideoId, setCurrentVideoId] = useState("");
+
+  const DECADE_SONGS = {
+    "60s": [
+      { title: "Light My Fire", videoId: "qoX6AKuYWL8" },
+      { title: "California Dreamin'", videoId: "N-aK6JnyFmk" },
+    ],
+    "70s": [
+      { title: "A Horse with No Name", videoId: "na47wMFfQCo" },
+      { title: "Don't Stop Me Now", videoId: "HgzGwKwLmgM" },
+    ],
+    "80s": [
+      { title: "Take On Me", videoId: "djV11Xbc914" },
+      { title: "Purple Rain", videoId: "TvnYmWpD_T8" },
+    ],
+    "90s": [
+      { title: "Don't Look Back In Anger", videoId: "r8OipmKFDeM" },
+      { title: "Virtual Insanity", videoId: "4JkIs37a2JE" },
+      { title: "Killing in the Name", videoId: "bWXazVhlyxQ" },
+      { title: "Black Hole Sun", videoId: "3mbBbFH9fAg" },
+      { title: "...Baby One More Time", videoId: "C-u5WLJ9Yk4" },
+      { title: "Semi-Charmed Life", videoId: "beINamVRGy4" },
+    ],
+    "00s": [
+      { title: "Britney Spears - Toxic", videoId: "LOZuxwVk7TU" },
+      { title: "Backstreet Boys - I want It That Way", videoId: "4fndeDfaWCg" },
+      { title: "Ocean Avenue", videoId: "X9fLbfzCqWw" },
+      { title: "Viva La Vida", videoId: "dvgZkm1xWPE" },
+      { title: "Feel Good Inc.", videoId: "HyHNuVaZJ-k" },
+      { title: "Ocean", videoId: "X9fLbfzCqWw" },
+    ],
+  };
+
+  const handleButtonClick = (decade) => {
+    setSelectedDecade(decade);
+    const selectedSongs = DECADE_SONGS[decade];
+    setSongs(selectedSongs);
+    setCurrentVideoId(selectedSongs[0].videoId);
+    setShowModal(true);
+  };
+
+  const handleSongClick = (videoId) => {
+    setCurrentVideoId(videoId);
+  };
 
   const loadGames = async () => {
     await fetch("//" + window.location.hostname + ":5000/games")
@@ -256,18 +309,61 @@ export default function Hobby() {
           title="Music"
           className={activeTab === "music" ? "tab-active" : "tab-hover"}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "white",
-            }}
-          >
-            I listen to a large variety of music, and I'm not too bad at
-            karaoke.
-          </div>
           <Music />
+          <Row className="justify-content-md-center mt-3">
+            {Object.keys(DECADE_SONGS).map((decade) => (
+              <Col xs="auto" key={decade}>
+                <Button
+                  variant="primary"
+                  onClick={() => handleButtonClick(decade)}
+                >
+                  {decade}
+                </Button>
+              </Col>
+            ))}
+          </Row>
+          <Modal
+            show={showModal}
+            onHide={() => setShowModal(false)}
+            size="lg"
+            centered
+          >
+            {" "}
+            <Modal.Header closeButton>
+              <Modal.Title>Songs from the {selectedDecade}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Row>
+                <Col md={6}>
+                  <ListGroup>
+                    {songs.map((song, index) => (
+                      <ListGroup.Item
+                        key={index}
+                        onClick={() => handleSongClick(song.videoId)}
+                        style={{ cursor: "pointer" }}
+                        className="interactive-song-title"
+                      >
+                        {song.title}
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Col>
+                <Col md={6}>
+                  {currentVideoId && ( // Only show iframe if there's a video ID selected
+                    <iframe
+                      width="100%"
+                      height="315"
+                      src={`https://www.youtube.com/embed/${currentVideoId}`}
+                      title="YouTube video"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  )}
+                </Col>
+              </Row>
+            </Modal.Body>
+          </Modal>
         </Tab>
         <Tab
           eventKey="gaming"

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import Image from "react-bootstrap/Image";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
-import Card from "react-bootstrap/Card";
-import { Modal, Button } from "react-bootstrap";
+import {
+  Image,
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  Card,
+  Modal,
+  Button,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Timeline from "../components/Timeline";
 
 const Home = () => {
   const [index, setIndex] = useState(0);
@@ -115,6 +119,7 @@ const Home = () => {
 
         {/* Bottom Row */}
         <Row className="d-flex" style={{ maxHeight: "%" }}>
+          <Timeline />
           <Card className="border-0 m-auto align-self-center">
             <Card.Body>
               <Card.Title
