@@ -6,6 +6,7 @@ import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Card, Carousel, Col, Row } from "react-bootstrap";
+import "../styles/App.css";
 
 export default function Study() {
   const [articles, setArticles] = useState([]);
@@ -223,6 +224,7 @@ export default function Study() {
                         <Card.Text>{badge.description}</Card.Text>
                         <Image
                           fluid
+                          className="badge-image"
                           style={{
                             marginTop: "2vh",
                             marginBottom: "1vh",

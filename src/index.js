@@ -12,7 +12,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Music from "./components/Music";
 import Test from "./pages/Test";
-import Study from "./Study";
+import Study from "./pages/Study";
 import Hobby from "./pages/Hobby";
 import Article from "./pages/Article";
 

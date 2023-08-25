@@ -77,3 +77,25 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* Default size for larger screens */
+.badge-image {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  width: 30%;
+  height: auto;
+}
+
+/* Adjust size for medium screens */
+@media (max-width: 768px) {
+  .badge-image {
+    width: 40%;
+  }
+}
+
+/* Adjust size for small screens */
+@media (max-width: 576px) {
+  .badge-image {
+    width: 50%;
+  }
+}
