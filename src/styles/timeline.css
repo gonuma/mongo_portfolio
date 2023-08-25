@@ -63,9 +63,54 @@
   display: block;
 }
 
-/* Icon for interactivity */
 .interactive-icon {
   display: inline-block;
   margin-left: 5px;
-  transform: translateY(-2px); /* Adjust based on the icon's size */
+  transform: translateY(-2px);
+}
+
+/* For mobile and smaller devices */
+@media (max-width: 768px) {
+  .timeline {
+    padding: 20px 0 0 40px; /* Give space on the left for the timeline */
+  }
+
+  .timeline::after {
+    left: 15px;
+    top: 0;
+    height: 100%;
+    width: 3px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    float: none; /* Reset floating */
+    padding: 10px 10px 40px; /* Reset padding */
+    position: relative; /* Reset positioning */
+  }
+
+  .timeline-header,
+  .timeline-description {
+    text-align: left; /* Align text to the left */
+  }
+
+  .timeline-description {
+    /* Move the description below the timeline */
+    margin-top: 10px;
+    margin-left: 25px; /* Align with the header */
+  }
+
+  /* .timeline-header::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #007bff;
+    position: absolute;
+    left: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  } */
 }
