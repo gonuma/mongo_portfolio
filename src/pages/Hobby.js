@@ -15,64 +15,67 @@ import {
   Modal,
   ListGroup,
 } from "react-bootstrap";
+import Cycling from "../components/Cycling.js";
+import Running from "../components/Running.js";
+import Lifting from "../components/Lifting.js";
 import Music from "../components/Music.js";
 import "../styles/App.css";
 
 export default function Hobby() {
-  const [activities, setActivities] = useState([]);
-  const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
-  const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
-  const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
-  const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
-  const [sessions, setSessions] = useState(0);
+  // const [activities, setActivities] = useState([]);
+  // const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
+  // const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
+  // const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
+  // const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
+  // const [sessions, setSessions] = useState(0);
   const [recentGames, setRecentGames] = useState([]);
   const [activeTab, setActiveTab] = useState("cycling");
-  const [showModal, setShowModal] = useState(false);
-  const [selectedDecade, setSelectedDecade] = useState("");
-  const [songs, setSongs] = useState([]);
-  const [currentVideoId, setCurrentVideoId] = useState("");
+  // const [showModal, setShowModal] = useState(false);
+  // const [selectedDecade, setSelectedDecade] = useState("");
+  // const [songs, setSongs] = useState([]);
+  // const [currentVideoId, setCurrentVideoId] = useState("");
 
-  const DECADE_SONGS = {
-    "60s": [
-      { title: "Light My Fire", videoId: "qoX6AKuYWL8" },
-      { title: "California Dreamin'", videoId: "N-aK6JnyFmk" },
-    ],
-    "70s": [
-      { title: "A Horse with No Name", videoId: "na47wMFfQCo" },
-      { title: "Don't Stop Me Now", videoId: "HgzGwKwLmgM" },
-    ],
-    "80s": [
-      { title: "Take On Me", videoId: "djV11Xbc914" },
-      { title: "Purple Rain", videoId: "TvnYmWpD_T8" },
-    ],
-    "90s": [
-      { title: "Don't Look Back In Anger", videoId: "r8OipmKFDeM" },
-      { title: "Virtual Insanity", videoId: "4JkIs37a2JE" },
-      { title: "Killing in the Name", videoId: "bWXazVhlyxQ" },
-      { title: "Black Hole Sun", videoId: "3mbBbFH9fAg" },
-      { title: "...Baby One More Time", videoId: "C-u5WLJ9Yk4" },
-      { title: "Semi-Charmed Life", videoId: "beINamVRGy4" },
-    ],
-    "00s": [
-      { title: "Britney Spears - Toxic", videoId: "LOZuxwVk7TU" },
-      { title: "Backstreet Boys - I want It That Way", videoId: "4fndeDfaWCg" },
-      { title: "Ocean Avenue", videoId: "X9fLbfzCqWw" },
-      { title: "Viva La Vida", videoId: "dvgZkm1xWPE" },
-      { title: "Feel Good Inc.", videoId: "HyHNuVaZJ-k" },
-    ],
-  };
+  // const DECADE_SONGS = {
+  //   "60s": [
+  //     { title: "Light My Fire", videoId: "qoX6AKuYWL8" },
+  //     { title: "California Dreamin'", videoId: "N-aK6JnyFmk" },
+  //   ],
+  //   "70s": [
+  //     { title: "A Horse with No Name", videoId: "na47wMFfQCo" },
+  //     { title: "Don't Stop Me Now", videoId: "HgzGwKwLmgM" },
+  //   ],
+  //   "80s": [
+  //     { title: "Take On Me", videoId: "djV11Xbc914" },
+  //     { title: "Purple Rain", videoId: "TvnYmWpD_T8" },
+  //   ],
+  //   "90s": [
+  //     { title: "Don't Look Back In Anger", videoId: "r8OipmKFDeM" },
+  //     { title: "Virtual Insanity", videoId: "4JkIs37a2JE" },
+  //     { title: "Killing in the Name", videoId: "bWXazVhlyxQ" },
+  //     { title: "Black Hole Sun", videoId: "3mbBbFH9fAg" },
+  //     { title: "...Baby One More Time", videoId: "C-u5WLJ9Yk4" },
+  //     { title: "Semi-Charmed Life", videoId: "beINamVRGy4" },
+  //   ],
+  //   "00s": [
+  //     { title: "Britney Spears - Toxic", videoId: "LOZuxwVk7TU" },
+  //     { title: "Backstreet Boys - I want It That Way", videoId: "4fndeDfaWCg" },
+  //     { title: "Ocean Avenue", videoId: "X9fLbfzCqWw" },
+  //     { title: "Viva La Vida", videoId: "dvgZkm1xWPE" },
+  //     { title: "Feel Good Inc.", videoId: "HyHNuVaZJ-k" },
+  //   ],
+  // };
 
-  const handleButtonClick = (decade) => {
-    setSelectedDecade(decade);
-    const selectedSongs = DECADE_SONGS[decade];
-    setSongs(selectedSongs);
-    setCurrentVideoId(selectedSongs[0].videoId);
-    setShowModal(true);
-  };
+  // const handleButtonClick = (decade) => {
+  //   setSelectedDecade(decade);
+  //   const selectedSongs = DECADE_SONGS[decade];
+  //   setSongs(selectedSongs);
+  //   setCurrentVideoId(selectedSongs[0].videoId);
+  //   setShowModal(true);
+  // };
 
-  const handleSongClick = (videoId) => {
-    setCurrentVideoId(videoId);
-  };
+  // const handleSongClick = (videoId) => {
+  //   setCurrentVideoId(videoId);
+  // };
 
   const loadGames = async () => {
     await fetch("//" + window.location.hostname + ":5000/games")
@@ -82,71 +85,71 @@ export default function Hobby() {
       });
   };
 
-  const loadActivities = async () => {
-    await fetch("//" + window.location.hostname + ":5000/activities")
-      .then((res) => res.json())
-      .then((data) => setActivities(data));
-  };
+  // const loadActivities = async () => {
+  //   await fetch("//" + window.location.hostname + ":5000/activities")
+  //     .then((res) => res.json())
+  //     .then((data) => setActivities(data));
+  // };
 
-  const cyclingDistanceCalculator = async () => {
-    let tempActivities = await activities;
-    let tempTotalDistance = 0;
-    let tempYearlyDistance = 0;
+  // const cyclingDistanceCalculator = async () => {
+  //   let tempActivities = await activities;
+  //   let tempTotalDistance = 0;
+  //   let tempYearlyDistance = 0;
 
-    tempActivities.map((activity) => {
-      if (activity.type === "Ride") {
-        tempTotalDistance += activity.distance;
-        if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
-          tempYearlyDistance += activity.distance;
-        }
-      }
-    });
-    setTotalDistanceCycling(tempTotalDistance / 1000); // Convert distance from meters to kilometers
-    setYearlyDistanceCycling(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
-  };
+  //   tempActivities.map((activity) => {
+  //     if (activity.type === "Ride") {
+  //       tempTotalDistance += activity.distance;
+  //       if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
+  //         tempYearlyDistance += activity.distance;
+  //       }
+  //     }
+  //   });
+  //   setTotalDistanceCycling(tempTotalDistance / 1000); // Convert distance from meters to kilometers
+  //   setYearlyDistanceCycling(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
+  // };
 
-  const runningDistanceCalculator = async () => {
-    let tempActivities = await activities;
-    let tempTotalDistance = 0;
-    let tempYearlyDistance = 0;
+  // const runningDistanceCalculator = async () => {
+  //   let tempActivities = await activities;
+  //   let tempTotalDistance = 0;
+  //   let tempYearlyDistance = 0;
 
-    tempActivities.map((activity) => {
-      if (activity.type === "Run") {
-        tempTotalDistance += activity.distance;
-        if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
-          tempYearlyDistance += activity.distance;
-        }
-      }
-    });
-    setTotalDistanceRunning(tempTotalDistance / 1000); // Convert distance from meters to kilometers
-    setYearlyDistanceRunning(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
-  };
+  //   tempActivities.map((activity) => {
+  //     if (activity.type === "Run") {
+  //       tempTotalDistance += activity.distance;
+  //       if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
+  //         tempYearlyDistance += activity.distance;
+  //       }
+  //     }
+  //   });
+  //   setTotalDistanceRunning(tempTotalDistance / 1000); // Convert distance from meters to kilometers
+  //   setYearlyDistanceRunning(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
+  // };
 
-  const sessionCalculator = async () => {
-    let tempActivities = await activities;
-    let tempSessions = 0;
+  // const sessionCalculator = async () => {
+  //   let tempActivities = await activities;
+  //   let tempSessions = 0;
 
-    tempActivities.map((activity) => {
-      if (activity.type === "WeightTraining") {
-        tempSessions += 1;
-      }
-    });
-    setSessions(tempSessions);
-  };
+  //   tempActivities.map((activity) => {
+  //     if (activity.type === "WeightTraining") {
+  //       tempSessions += 1;
+  //     }
+  //   });
+  //   setSessions(tempSessions);
+  // };
 
-  useEffect(() => {
-    loadActivities();
-  }, []);
+  // useEffect(() => {
+  //   loadActivities();
+  // }, []);
 
   useEffect(() => {
     loadGames();
   }, []);
 
-  useEffect(() => {
-    cyclingDistanceCalculator();
-    runningDistanceCalculator();
-    sessionCalculator();
-  }, [activities]);
+  // useEffect(() => {
+  //   cyclingDistanceCalculator();
+  //   runningDistanceCalculator();
+  //   sessionCalculator();
+  // }, [activities]);
 
   return (
     <Container
@@ -164,7 +167,7 @@ export default function Hobby() {
         id="uncontrolled-tab-example"
         className="mb-3 text-white"
       >
-        <Tab
+        {/* <Tab
           eventKey="cycling"
           title="Cycling"
           className={activeTab === "cycling" ? "tab-active" : "tab-hover"}
@@ -219,8 +222,18 @@ export default function Hobby() {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Tab>
+        </Tab> */}
         <Tab
+          eventKey="cycling"
+          title="Cycling"
+          className={activeTab === "cycling" ? "tab-active" : "tab-hover"}
+        >
+          <Cycling
+          // totalDistanceCycling={totalDistanceCycling}
+          // yearlyDistanceCycling={yearlyDistanceCycling}
+          />
+        </Tab>
+        {/* <Tab
           eventKey="running"
           title="Running"
           className={activeTab === "running" ? "tab-active" : "tab-hover"}
@@ -271,8 +284,18 @@ export default function Hobby() {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Tab>
+        </Tab> */}
         <Tab
+          eventKey="running"
+          title="Running"
+          className={activeTab === "running" ? "tab-active" : "tab-hover"}
+        >
+          <Running
+          // totalDistanceRunning={totalDistanceRunning}
+          // yearlyDistanceRunning={yearlyDistanceRunning}
+          />
+        </Tab>
+        {/* <Tab
           eventKey="lifting"
           title="Weight Lifting"
           className={activeTab === "lifting" ? "tab-active" : "tab-hover"}
@@ -302,6 +325,15 @@ export default function Hobby() {
               </Card.Text>
             </Card.Body>
           </Card>
+        </Tab> */}
+        <Tab
+          eventKey="lifting"
+          title="Weight Lifting"
+          className={activeTab === "lifting" ? "tab-active" : "tab-hover"}
+        >
+          <Lifting
+          // sessions={sessions}
+          />
         </Tab>
         <Tab
           eventKey="music"
@@ -309,7 +341,7 @@ export default function Hobby() {
           className={activeTab === "music" ? "tab-active" : "tab-hover"}
         >
           <Music />
-          <Row className="justify-content-md-center mt-3">
+          {/* <Row className="justify-content-md-center mt-3">
             <div
               style={{
                 display: "flex",
@@ -375,7 +407,7 @@ export default function Hobby() {
                 </Col>
               </Row>
             </Modal.Body>
-          </Modal>
+          </Modal> */}
         </Tab>
         <Tab
           eventKey="gaming"
