@@ -17,62 +17,36 @@ const Gaming = () => {
   }, []);
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "white",
-        }}
-      >
-        I play a lot of videogames. I've implemented the Steam Web API and web
-        scraping to programmatically fetch my most recently played games, and a
-        little supplemental info on them.
+    <>
+      <div className="bg-dark text-light" style={{ minHeight: "100vh" }}>
+        I like videogames. I've implemented the Steam Web API and web scraping
+        to programmatically fetch my most recently played games and a little
+        supplemental info on them.
       </div>
 
       <Carousel indicators={false}>
-        {recentGames.map((game, index) => {
-          return (
-            <Carousel.Item key={`${game.name}`}>
-              <Card className="align-items-center border-0">
-                <Card.Body>
-                  <Card.Title
-                    className="text-center"
-                    style={{
-                      backgroundColor: "#d3d3d3",
-                      color: "white",
-                      padding: "10px",
-                    }}
-                  >
-                    {game.name}
-                  </Card.Title>
-                  <Card.Img
-                    src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
-                    style={{
-                      width: "50%",
-                      height: "auto",
-                      display: "block",
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                    }}
-                  />
-                  <Card.Text
-                    style={{
-                      backgroundColor: "#d3d3d3",
-                      color: "white",
-                      padding: "10px",
-                    }}
-                  >
-                    {game.description}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Carousel.Item>
-          );
-        })}
+        {recentGames.map((game) => (
+          <Carousel.Item key={game.name}>
+            <Card className="bg-dark text-light align-items-center border-0">
+              <Card.Body>
+                <Card.Title className="text-center">{game.name}</Card.Title>
+                <Card.Img
+                  src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
+                  style={{
+                    width: "50%",
+                    height: "auto",
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                />
+                <Card.Text className="mt-3">{game.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Carousel.Item>
+        ))}
       </Carousel>
-    </div>
+    </>
   );
 };
 
