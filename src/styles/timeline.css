@@ -93,24 +93,4 @@
   .timeline-description {
     text-align: left; /* Align text to the left */
   }
-
-  .timeline-description {
-    /* Move the description below the timeline */
-    margin-top: 10px;
-    margin-left: 25px; /* Align with the header */
-  }
-
-  /* .timeline-header::before {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #007bff;
-    position: absolute;
-    left: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-  } */
 }
