@@ -6,17 +6,30 @@ function Running() {
   const [totalDistanceRunning, setTotalDistanceRunning] = useState(0);
   const [yearlyDistanceRunning, setYearlyDistanceRunning] = useState(0);
 
-  const loadActivities = async () => {
-    await fetch("//" + window.location.hostname + ":5000/activities")
-      .then((res) => res.json())
-      .then((data) => setActivities(data));
+  const imageStyle = {
+    width: "40%",
+    marginBottom: "20px",
   };
 
-  const runningDistanceCalculator = () => {
+  useEffect(() => {
+    const loadActivities = async () => {
+      try {
+        const response = await fetch(
+          "//" + window.location.hostname + ":5000/activities"
+        );
+        const data = await response.json();
+        setActivities(data);
+      } catch (error) {
+        console.error("Failed to fetch activities", error);
+      }
+    };
+
+    loadActivities();
+
     let tempTotalDistance = 0;
     let tempYearlyDistance = 0;
 
-    activities.map((activity) => {
+    activities.forEach((activity) => {
       if (activity.type === "Run") {
         tempTotalDistance += activity.distance;
         if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
@@ -24,16 +37,9 @@ function Running() {
         }
       }
     });
-    setTotalDistanceRunning(tempTotalDistance / 1000); // Convert distance from meters to kilometers
-    setYearlyDistanceRunning(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
-  };
 
-  useEffect(() => {
-    loadActivities();
-  }, []);
-
-  useEffect(() => {
-    runningDistanceCalculator();
+    setTotalDistanceRunning(tempTotalDistance / 1000);
+    setYearlyDistanceRunning(tempYearlyDistance / 1000);
   }, [activities]);
 
   return (
@@ -50,7 +56,7 @@ function Running() {
         <Image
           src="https://via.placeholder.com/500x300.png?text=Runner"
           alt="Placeholder Runner"
-          style={{ width: "40%", marginBottom: "20px" }}
+          style={imageStyle}
         />
         I hate running, but I do it enough to warrant putting it here.
       </div>

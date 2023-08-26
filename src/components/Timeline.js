@@ -1,16 +1,40 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useRef } from "react";
 import "../styles/timeline.css";
 
-const TimelineItem = ({ date, event, description }) => {
-  const [isActive, setIsActive] = useState(false);
+const Tooltip = ({ description, position }) => {
+  return (
+    <div
+      className="tooltip-container"
+      style={{
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+      }}
+    >
+      {description}
+    </div>
+  );
+};
+
+const TimelineItem = ({
+  date,
+  event,
+  description,
+  handleShowTooltip,
+  handleHideTooltip,
+}) => {
+  const itemRef = useRef(null);
+
+  const onMouseEnterHandler = () => {
+    const rect = itemRef.current.getBoundingClientRect();
+    handleShowTooltip(description, {
+      top: rect.top,
+      left: rect.left + rect.width / 2,
+    });
+  };
 
   return (
-    <div className="timeline-item" onClick={() => setIsActive(!isActive)}>
-      <div className={`timeline-description ${isActive ? "active" : ""}`}>
-        {description}
-      </div>
+    <div className="timeline-item">
+      <div className="timeline-description">{description}</div>
       <div className="timeline-header">
         <strong>{date}</strong> - {event}
       </div>
@@ -19,6 +43,24 @@ const TimelineItem = ({ date, event, description }) => {
 };
 
 const Timeline = () => {
+  const [currentTooltip, setCurrentTooltip] = useState({
+    description: "",
+    position: { top: 0, left: 0 },
+  });
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+
+  const handleShowTooltip = (description, position) => {
+    setCurrentTooltip({
+      description,
+      position: { top: position.top - 60, left: position.left - 100 }, // adjust as needed
+    });
+    setIsTooltipVisible(true);
+  };
+
+  const handleHideTooltip = () => {
+    setIsTooltipVisible(false);
+  };
+
   const events = [
     {
       date: "12/2015",
@@ -55,9 +97,16 @@ const Timeline = () => {
     <div className="timeline-container">
       <div className="timeline">
         {events.map((e, index) => (
-          <TimelineItem key={index} {...e} />
+          <TimelineItem
+            key={index}
+            {...e}
+            handleShowTooltip={handleShowTooltip}
+            handleHideTooltip={handleHideTooltip}
+          />
         ))}
       </div>
+
+      {isTooltipVisible && <Tooltip {...currentTooltip} />}
     </div>
   );
 };

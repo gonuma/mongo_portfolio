@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Carousel } from "react-bootstrap";
+import { Card, Carousel, Container } from "react-bootstrap";
 
 const Gaming = () => {
   const [recentGames, setRecentGames] = useState([]);
@@ -21,43 +21,36 @@ const Gaming = () => {
     },
   ];
 
-  const loadGames = async () => {
-    try {
-      const response = await fetch(
-        "//" + window.location.hostname + ":5000/games"
-      );
-      const data = await response.json();
-      if (data && data.length > 0) {
-        setRecentGames(data);
-      } else {
+  useEffect(() => {
+    const loadGames = async () => {
+      try {
+        const response = await fetch(
+          "//" + window.location.hostname + ":5000/games"
+        );
+        const data = await response.json();
+        setRecentGames(data.length ? data : dummyGames);
+      } catch (error) {
+        console.error("Failed to fetch games, using dummy data", error);
         setRecentGames(dummyGames);
       }
-    } catch (error) {
-      console.error("Failed to fetch games, using dummy data", error);
-      setRecentGames(dummyGames);
-    }
-  };
-  useEffect(() => {
+    };
+
     loadGames();
   }, []);
 
   const handleCarouselClick = (e) => {
-    if (isHovering) return; // Prevent scrolling if hovering over the item
+    if (isHovering) return;
 
-    const carouselElement = e.currentTarget;
-    const clickX = e.clientX - carouselElement.getBoundingClientRect().left;
-
-    if (clickX < carouselElement.offsetWidth / 2) {
-      // Previous slide if clicked on the left side
+    const clickX = e.clientX - e.currentTarget.getBoundingClientRect().left;
+    if (clickX < e.currentTarget.offsetWidth / 2) {
       carouselRef.current.prev();
     } else {
-      // Next slide if clicked on the right side
       carouselRef.current.next();
     }
   };
 
   return (
-    <div className="bg-dark text-light" style={{ minHeight: "75vh" }}>
+    <Container fluid className="text-white py-5">
       <h1 className="text-center py-3">My Recent Games</h1>
       <Carousel
         indicators={false}
@@ -70,18 +63,12 @@ const Gaming = () => {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <Card className="bg-dark text-light align-items-center border-0">
+            <Card className="game-card">
               <Card.Body>
                 <Card.Title className="text-center">{game.name}</Card.Title>
                 <Card.Img
+                  className="game-card-img"
                   src={`https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/capsule_616x353.jpg`}
-                  style={{
-                    width: "50%",
-                    height: "auto",
-                    display: "block",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                  }}
                 />
                 <Card.Text className="mt-3">{game.description}</Card.Text>
               </Card.Body>
@@ -89,7 +76,7 @@ const Gaming = () => {
           </Carousel.Item>
         ))}
       </Carousel>
-    </div>
+    </Container>
   );
 };
 

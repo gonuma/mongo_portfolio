@@ -1,66 +1,15 @@
-/* @import '~antd/dist/antd.css'; */
+/* Base Styles */
+body {
+  padding-top: 60px;
+}
 
 .App {
   text-align: center;
 }
 
-body {
-  padding-top: 60px;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  display: none !important;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.carousel-image {
-  max-width: 50%; /* Adjusts the maximum width of the image */
-  height: auto; /* Makes the image responsive vertically */
-}
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-  .carousel-image {
-    max-width: 70%;
-  }
-}
-
-/* Media query for even smaller screens */
-@media (max-width: 576px) {
-  .carousel-image {
-    max-width: 90%;
-  }
-}
-
-.carousel-item-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.carousel-image {
-  margin-bottom: 25px; /* Adjust this as needed */
-}
-
-.carousel-caption-container {
-  width: 100%;
-  text-align: center;
-}
-
-.carousel-caption-container .carousel-caption {
-  color: white;
-  text-shadow: 4px 4px 5px black, 0 0 30px black, 0 0 10px black;
 }
 
 .App-header {
@@ -78,6 +27,34 @@ body {
   color: #61dafb;
 }
 
+/* Component-specific styles */
+.carousel-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  display: none !important;
+}
+
+.carousel-image {
+  margin-bottom: 25px; /* Adjust this as needed */
+  max-width: 50%; /* Adjusts the maximum width of the image */
+  height: auto; /* Makes the image responsive vertically */
+}
+
+.carousel-caption-container {
+  width: 100%;
+  text-align: center;
+}
+
+.carousel-caption-container .carousel-caption {
+  color: white;
+  text-shadow: 4px 4px 5px black, 0 0 30px black, 0 0 10px black;
+}
+
 .brand {
   font-size: 2rem !important;
 }
@@ -89,6 +66,11 @@ body {
 
 .tab-hover:hover {
   background-color: #555; /* Another slightly lighter shade when hovered */
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
 }
 
 .interactive-song-title {
@@ -107,19 +89,18 @@ body {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 450px) {
-  .brand {
-    font-size: 1rem !important;
-  }
+.game-card {
+  background-color: #343a40;
+  border: none;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.game-card-img {
+  width: 50%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Default size for larger screens */
@@ -130,16 +111,45 @@ body {
   height: auto;
 }
 
-/* Adjust size for medium screens */
+/* Media Queries */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 @media (max-width: 768px) {
+  .carousel-image {
+    max-width: 70%;
+  }
+
   .badge-image {
     width: 40%;
   }
 }
 
-/* Adjust size for small screens */
 @media (max-width: 576px) {
+  .carousel-image {
+    max-width: 90%;
+  }
+
   .badge-image {
     width: 50%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .brand {
+    font-size: 1rem !important;
+  }
+}
+
+/* Animations */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

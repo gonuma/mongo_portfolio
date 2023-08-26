@@ -87,157 +87,26 @@ export default function Study() {
       style={{
         backgroundColor: "#2C2C2C",
         minHeight: "100vh",
+        fontSize: "18px", // This sets the default font size for the entire component
       }}
     >
       {/* <button onClick={() => console.log(articles)}>Articles</button> */}
       {/* <button onClick={() => console.log(categories)}>Categories</button> */}
       {/* <Button onClick={() => console.log(badges)}>Log Badges</Button> */}
-      {/* <Image
-        fluid
+
+      <div
         style={{
-          maxHeight: "20vh",
-          maxWidth: "90vw",
-          padding: "1vh",
-          display: "block",
-          margin: "auto",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "white",
+          flexDirection: "column",
+          fontSize: "20px", // Slightly larger for this introduction text
         }}
-        src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/Raspberry_Pi_4_Model_B_-_Side.jpg"
-      /> */}
-      <div className="d-flex justify-content-center align-items-center my-3 text-light">
+      >
         I'm working on a tool to allow me to write writeups and notes, but for
         the meantime, enjoy a few badges I've earned during my studies.
       </div>
-
-      {/* <Accordion alwaysOpen>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Hardware</Accordion.Header>
-          <Accordion.Body>
-            <ListGroup>
-              {articles.map((item, index) => {
-                {
-                  if (item.category === "hardware") {
-                    return (
-                      <ListGroup.Item
-                        action
-                        href={"#link" + index}
-                        onClick={(e) => {
-                          articles.map((article) => {
-                            if (article.title === e.target.text) {
-                              let articleDiv =
-                                document.getElementById("article");
-                              setArticle(article.body);
-                              return (articleDiv.innerText = article.body);
-                            }
-                          });
-                        }}
-                      >
-                        {item.title}
-                      </ListGroup.Item>
-                    );
-                  }
-                }
-              })}
-            </ListGroup>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>Red Teaming</Accordion.Header>
-          <Accordion.Body>
-            <ListGroup>
-              {articles.map((item, index) => {
-                {
-                  if (item.category === "red teaming") {
-                    return (
-                      <ListGroup.Item
-                        action
-                        href={"#link" + index}
-                        onClick={(e) => {
-                          articles.map((article) => {
-                            if (article.title === e.target.text) {
-                              let articleDiv =
-                                document.getElementById("article");
-                              setArticle(article.body);
-                              return (articleDiv.innerText = article.body);
-                            }
-                          });
-                        }}
-                      >
-                        {item.title}
-                      </ListGroup.Item>
-                    );
-                  }
-                }
-              })}
-            </ListGroup>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>Blue Teaming</Accordion.Header>
-          <Accordion.Body>
-            <ListGroup>
-              {articles.map((item, index) => {
-                {
-                  if (item.category === "blue teaming") {
-                    return (
-                      <ListGroup.Item
-                        action
-                        href={"#link" + index}
-                        onClick={(e) => {
-                          articles.map((article) => {
-                            if (article.title === e.target.text) {
-                              let articleDiv =
-                                document.getElementById("article");
-                              setArticle(article.body);
-                              return (articleDiv.innerText = article.body);
-                            }
-                          });
-                        }}
-                      >
-                        {item.title}
-                      </ListGroup.Item>
-                    );
-                  }
-                }
-              })}
-            </ListGroup>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="3">
-          <Accordion.Header>Recon</Accordion.Header>
-          <Accordion.Body>
-            <ListGroup>
-              {articles.map((item, index) => {
-                {
-                  if (item.category === "recon") {
-                    return (
-                      <ListGroup.Item
-                        action
-                        href={"#link" + index}
-                        onClick={(e) => {
-                          articles.map((article) => {
-                            if (article.title === e.target.text) {
-                              let articleDiv =
-                                document.getElementById("article");
-                              setArticle(article.body);
-                              return (articleDiv.innerText = article.body);
-                            }
-                          });
-                        }}
-                      >
-                        {item.title}
-                      </ListGroup.Item>
-                    );
-                  }
-                }
-              })}
-            </ListGroup>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-      <p id="article"></p> */}
 
       {/* Badge Showcase */}
       <Card
@@ -245,15 +114,22 @@ export default function Study() {
         style={{ backgroundColor: "#212529" }}
       >
         <Card.Body>
-          <Card.Title style={{ color: "white" }}>TryHackMe Badges</Card.Title>
+          <Card.Title style={{ color: "white", fontSize: "24px" }}>
+            TryHackMe Badges
+          </Card.Title>{" "}
+          // Larger for the title
           <Row>
             {badges.map((badge) => {
               return (
                 <Col md={4} key={badge.name} className="mb-4">
                   <Card>
                     <Card.Body className="text-center">
-                      <Card.Title>{badge.name}</Card.Title>
-                      <Card.Text>{badge.description}</Card.Text>
+                      <Card.Title style={{ fontSize: "20px" }}>
+                        {badge.name}
+                      </Card.Title>
+                      <Card.Text style={{ fontSize: "18px" }}>
+                        {badge.description}
+                      </Card.Text>
                       <Image
                         fluid
                         className="badge-image"
@@ -271,33 +147,6 @@ export default function Study() {
               );
             })}
           </Row>
-          {/* <Carousel>
-            {badges.map((badge, index) => {
-              return (
-                <Carousel.Item key={`${badge.name}`}>
-                  <Col className="align-items-center">
-                    <Card>
-                      <Card.Body className="text-center">
-                        <Card.Title>{badge.name}</Card.Title>
-                        <Card.Text>{badge.description}</Card.Text>
-                        <Image
-                          fluid
-                          className="badge-image"
-                          style={{
-                            marginTop: "2vh",
-                            marginBottom: "1vh",
-                            width: "30%",
-                            height: "auto",
-                          }}
-                          src={`https://tryhackme.com${badge.img_icon_url}`}
-                        />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Carousel.Item>
-              );
-            })}
-          </Carousel> */}
         </Card.Body>
       </Card>
     </Container>

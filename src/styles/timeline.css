@@ -1,3 +1,4 @@
+/* Base Styles */
 .timeline {
   position: relative;
   width: 100%;
@@ -9,11 +10,16 @@
   position: absolute;
   left: 0;
   right: 0;
-  /* top: 20%; */
   height: 3px;
   background: #ddd;
   clear: both;
   z-index: 0;
+}
+
+.timeline-container {
+  position: relative;
+  padding-top: 10px; /* Reserve space for the description */
+  padding-bottom: 15px;
 }
 
 .timeline-item {
@@ -24,12 +30,25 @@
   padding: 10px;
 }
 
-.timeline-item::before {
-  display: none;
+.interactive-icon {
+  display: inline-block;
+  margin-left: 5px;
+  transform: translateY(-2px);
 }
 
-.timeline-item:hover::before {
-  background: #007bff; /* Bootstrap primary color */
+/* Component-Specific Styles */
+.tooltip-container {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 10;
+  width: 200px;
+  text-align: center;
+  transform: translateX(-50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .timeline-item .timeline-header {
@@ -37,25 +56,29 @@
   transition: color 0.3s;
 }
 
-.timeline-item:hover .timeline-header {
-  color: #007bff; /* Bootstrap primary color */
-}
-
-.timeline-container {
-  position: relative;
-  padding-top: 10px; /* Reserve space for the description */
-  padding-bottom: 15px;
-}
-
 .timeline-description {
   display: none;
   position: absolute;
-  top: 0;
-  width: 100%;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #d3d3d3;
-  padding: 10px;
+  padding: 8px 12px;
   border-radius: 5px;
-  z-index: 1;
+  z-index: 10;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* States */
+.timeline-item:hover::before {
+  background: #007bff;
+}
+
+.timeline-item:hover .timeline-header {
+  color: #007bff;
 }
 
 .timeline-item:hover .timeline-description,
@@ -63,16 +86,10 @@
   display: block;
 }
 
-.interactive-icon {
-  display: inline-block;
-  margin-left: 5px;
-  transform: translateY(-2px);
-}
-
-/* For mobile and smaller devices */
+/* Media Queries */
 @media (max-width: 768px) {
   .timeline {
-    padding: 20px 0 0 40px; /* Give space on the left for the timeline */
+    padding: 20px 0 0 40px;
   }
 
   .timeline::after {
@@ -84,13 +101,12 @@
 
   .timeline-item {
     width: 100%;
-    float: none; /* Reset floating */
-    padding: 10px 10px 40px; /* Reset padding */
-    position: relative; /* Reset positioning */
+    float: none;
+    padding: 10px 10px 40px;
   }
 
   .timeline-header,
   .timeline-description {
-    text-align: left; /* Align text to the left */
+    text-align: left;
   }
 }

@@ -2,39 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Image, Card, ProgressBar } from "react-bootstrap";
 
 function Cycling() {
-  const [activities, setActivities] = useState([]);
   const [totalDistanceCycling, setTotalDistanceCycling] = useState(0);
   const [yearlyDistanceCycling, setYearlyDistanceCycling] = useState(0);
 
-  const loadActivities = async () => {
-    await fetch("//" + window.location.hostname + ":5000/activities")
+  useEffect(() => {
+    fetch("//" + window.location.hostname + ":5000/activities")
       .then((res) => res.json())
-      .then((data) => setActivities(data));
-  };
+      .then((data) => {
+        const { total, yearly } = data.reduce(
+          (accum, activity) => {
+            if (activity.type === "Ride") {
+              accum.total += activity.distance;
+              if (
+                new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")
+              ) {
+                accum.yearly += activity.distance;
+              }
+            }
+            return accum;
+          },
+          { total: 0, yearly: 0 }
+        );
 
-  const cyclingDistanceCalculator = () => {
-    let tempTotalDistance = 0;
-    let tempYearlyDistance = 0;
-
-    activities.map((activity) => {
-      if (activity.type === "Ride") {
-        tempTotalDistance += activity.distance;
-        if (new Date(activity.startDate) >= new Date("2023-01-01T00:00:00")) {
-          tempYearlyDistance += activity.distance;
-        }
-      }
-    });
-    setTotalDistanceCycling(tempTotalDistance / 1000); // Convert distance from meters to kilometers
-    setYearlyDistanceCycling(tempYearlyDistance / 1000); // Convert distance from meters to kilometers
-  };
-
-  useEffect(() => {
-    loadActivities();
+        setTotalDistanceCycling(total / 1000); // Convert distance from meters to kilometers
+        setYearlyDistanceCycling(yearly / 1000); // Convert distance from meters to kilometers
+      });
   }, []);
-
-  useEffect(() => {
-    cyclingDistanceCalculator();
-  }, [activities]);
 
   return (
     <div>
