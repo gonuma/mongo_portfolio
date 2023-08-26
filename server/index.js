@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const fetch = require("node-fetch");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
@@ -71,76 +70,131 @@ app.get("/activities", async (req, res) => {
 });
 
 app.get("/spotify-refresh", async (req, res) => {
-  const parameters = {
-    method: "POST",
+  const { data } = await axios.post("https://accounts.spotify.com/api/token", {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: "Basic " + process.env.SPOTIFY_ID_SECRET_64,
     },
     body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`,
-  };
-  const data = await fetch(
-    "https://accounts.spotify.com/api/token",
-    parameters
-  );
-  res.send(await data.json());
+  });
+  res.send(data);
 });
 
 app.get("/games", async (req, res) => {
-  const steamData = await fetch(
-    `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&count=7&format=json`
-  );
-  const steamJson = await steamData.json();
-
-  const gamePromises = steamJson.response.games.map(async (game) => {
-    const html = await axios.get(
-      `https://store.steampowered.com/app/${game.appid}`
-    );
-    const $ = cheerio.load(html.data);
-    return {
-      appid: game.appid,
-      name: game.name,
-      img_icon_url: game.img_icon_url,
-      description: $(".game_description_snippet").text(),
-    };
-  });
-
-  const finalData = await Promise.all(gamePromises);
-  res.send(finalData);
+  const gameData = await getSteamGameData();
+  res.send(gameData);
 });
+
+const getSteamGameData = async () => {
+  try {
+    const { data: steamData } = await axios.get(
+      `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&count=7&format=json`
+    );
+
+    const gameDetails = await Promise.all(
+      steamData.response.games.map(async (game) => {
+        const { data: html } = await axios.get(
+          `https://store.steampowered.com/app/${game.appid}`
+        );
+        const $ = cheerio.load(html);
+        return {
+          appid: game.appid,
+          name: game.name,
+          img_icon_url: game.img_icon_url,
+          description: $(".game_description_snippet").text().trim(),
+        };
+      })
+    );
+
+    return gameDetails;
+  } catch (error) {
+    console.error("Error fetching Steam game data:", error);
+    return [];
+  }
+};
+
+const scrapeAndUpdateBadges = async () => {
+  try {
+    const { data: html } = await axios.get(
+      "https://tryhackme.com/p/fallabrine"
+    );
+    const $ = cheerio.load(html);
+    const badgesFromDB = await Badge.find({}, { _id: 0 });
+
+    $(".badge-achieved").each(async (index, element) => {
+      const badge = {
+        name: $(".m-0.faded").eq(index).text().trim(),
+        description: $(".size-18.bold").eq(index).text().trim(),
+        img_icon_url: $(".badge-image").eq(index).attr("src"),
+      };
+
+      if (!badgesFromDB.find((item) => item.name === badge.name)) {
+        await Badge.create(badge);
+        console.log("New badge found and saved:", badge.name);
+      }
+    });
+  } catch (error) {
+    console.error("Error updating badges:", error);
+  }
+};
+
+// app.get("/games", async (req, res) => {
+//   const { data: steamData } = await axios.get(
+//     `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&count=7&format=json`
+//   );
+
+//   const gamePromises = steamData.response.games.map(async (game) => {
+//     const { data: html } = await axios.get(
+//       `https://store.steampowered.com/app/${game.appid}`
+//     );
+//     const $ = cheerio.load(html);
+//     return {
+//       appid: game.appid,
+//       name: game.name,
+//       img_icon_url: game.img_icon_url,
+//       description: $(".game_description_snippet").text(),
+//     };
+//   });
+
+//   const finalData = await Promise.all(gamePromises);
+//   res.send(finalData);
+// });
 
 // Scrape TryHackMe & Update badge database every Sunday at Midnight
-const updateBadges = cronJob.schedule("0 0 * * 0", async () => {
-  const url = "https://tryhackme.com/p/fallabrine";
+// const updateBadges = cronJob.schedule("0 0 * * 0", async () => {
+//   const url = "https://tryhackme.com/p/fallabrine";
 
-  async function getPage(url) {
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: "networkidle0" });
+//   async function getPage(url) {
+//     const browser = await puppeteer.launch({ headless: true });
+//     const page = await browser.newPage();
+//     await page.goto(url, { waitUntil: "networkidle0" });
 
-    const html = await page.content();
-    await browser.close();
-    return html;
-  }
+//     const html = await page.content();
+//     await browser.close();
+//     return html;
+//   }
 
-  const html = await getPage(url);
-  const $ = cheerio.load(html);
-  const badges = await Badge.find({}, { _id: 0 });
+//   const html = await getPage(url);
+//   const $ = cheerio.load(html);
+//   const badges = await Badge.find({}, { _id: 0 });
 
-  $(".badge-achieved").each((index, element) => {
-    const badge = {
-      name: $(".m-0.faded").eq(index).text(),
-      description: $(".size-18.bold").eq(index).text(),
-      img_icon_url: $(".badge-image").eq(index).attr("src"),
-    };
-    if (!badges.find((item) => item.name === badge.name)) {
-      const newBadge = new Badge(badge);
-      Badge.create(newBadge);
-      console.log("New badge found: " + newBadge);
-      // console.log();
-    }
-  });
-});
+//   $(".badge-achieved").each((index, element) => {
+//     const badge = {
+//       name: $(".m-0.faded").eq(index).text(),
+//       description: $(".size-18.bold").eq(index).text(),
+//       img_icon_url: $(".badge-image").eq(index).attr("src"),
+//     };
+//     if (!badges.find((item) => item.name === badge.name)) {
+//       const newBadge = new Badge(badge);
+//       Badge.create(newBadge);
+//       console.log("New badge found: " + newBadge);
+//       // console.log();
+//     }
+//   });
+// });
+
+// Scrape TryHackMe & Update badge database every Sunday at Midnight
+const updateBadges = cronJob.schedule("0 0 * * 0", scrapeAndUpdateBadges);
 
 // Update activities in Database Every Sunday, Tuesday, Thursday at Midnight
 const updateActivities = cronJob.schedule("0 0 * * 0,2,4", () => {
