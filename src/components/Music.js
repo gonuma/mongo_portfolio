@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 
 const Music = () => {
-  const [artists, setArtists] = useState([]);
+//  const [artists, setArtists] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedDecade, setSelectedDecade] = useState("");
@@ -85,6 +85,8 @@ const Music = () => {
     },
   ];
 
+  const artists = dummyArtists;
+
   const handleSongClick = (videoId) => {
     setCurrentVideoId(videoId);
   };
@@ -109,6 +111,7 @@ const Music = () => {
     setShowModal(true);
   };
 
+/*
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -154,6 +157,7 @@ const Music = () => {
     );
   }
 
+*/
   return (
     <Container fluid className="text-white py-5">
       <Row className="justify-content-center mb-4">
@@ -235,6 +239,7 @@ const Music = () => {
         <h1 className="text-center">Greg's Top Recent Artists on Spotify...</h1>
       </Row>
       <Row>
+
         <Carousel
           indicators={false}
           ref={carouselRef}
@@ -259,6 +264,7 @@ const Music = () => {
             </Carousel.Item>
           ))}
         </Carousel>
+
       </Row>
     </Container>
   );

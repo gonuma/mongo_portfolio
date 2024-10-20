@@ -42,8 +42,8 @@ function Lifting() {
         }}
       >
         <Image
-          src="https://via.placeholder.com/500x300.png?text=Weightlifting"
-          alt="Placeholder Weightlifting"
+          src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/lifting.webp"
+          alt="Man Lifting Weights"
           style={{ width: "40%", marginBottom: "20px" }}
         />
         I'm working on gettin' swole.

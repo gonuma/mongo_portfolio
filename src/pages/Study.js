@@ -117,7 +117,6 @@ export default function Study() {
           <Card.Title style={{ color: "white", fontSize: "24px" }}>
             TryHackMe Badges
           </Card.Title>{" "}
-          // Larger for the title
           <Row>
             {badges.map((badge) => {
               return (

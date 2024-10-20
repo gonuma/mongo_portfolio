@@ -53,10 +53,11 @@ function Running() {
           flexDirection: "column",
         }}
       >
-        <Image
-          src="https://via.placeholder.com/500x300.png?text=Runner"
-          alt="Placeholder Runner"
-          style={imageStyle}
+<Image
+         // src="https://via.placeholder.com/500x300.png?text=Road+Cyclist"
+ src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/treadmill.avif"          
+alt="Mouse on a Wheel"
+          style={{ width: "40%", marginBottom: "20px" }}
         />
         I hate running, but I do it enough to warrant putting it here.
       </div>

@@ -161,6 +161,7 @@ const Home = () => {
               </Card.Title>
               <ol style={{ textAlign: "left" }}>
                 <li>Cisco CCNA</li>
+                <li>Comptia Security+</li>
                 <li>JLPT N1</li>
               </ol>
             </Card.Body>

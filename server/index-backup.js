@@ -225,12 +225,6 @@ app.get("/games", async (req, res) => {
     .then((response) => response.json())
     .then((data) => {
       let finalData = [];
-      if (!data.response || !data.response.games || data.response.games.length === 0) {
-        // Handle case when data.response.games is empty
-        res.status(404).send("No games found");
-        return;
-      }
-
       data.response.games.forEach((game) => {
         requestPromise(`https://store.steampowered.com/app/${game.appid}`).then(
           (html) => {
@@ -242,21 +236,16 @@ app.get("/games", async (req, res) => {
               description: $(".game_description_snippet").text(),
             });
 
-            if (finalData.length === data.response.games.length) {
-              // All data has been compiled
+            data.response.games.shift();
+            if (data.response.games.length <= 0) {
+              // console.log("Data compiled");
               res.send(finalData);
             }
           }
         );
       });
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      res.status(500).send("Error fetching data");
     });
 });
-
-
 // Uncomment for production
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);

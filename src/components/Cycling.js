@@ -41,8 +41,9 @@ function Cycling() {
         }}
       >
         <Image
-          src="https://via.placeholder.com/500x300.png?text=Road+Cyclist"
-          alt="Placeholder Road Cyclist"
+         // src="https://via.placeholder.com/500x300.png?text=Road+Cyclist"
+ src="https://s3.ap-northeast-1.amazonaws.com/www.gonuma.com/images/bike_banner.jpg"          
+alt="Road Bike Banner"
           style={{ width: "40%", marginBottom: "20px" }}
         />
         My sit-bones hurt. I try to make time whenever possible to go cycling,
